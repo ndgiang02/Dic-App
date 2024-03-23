@@ -10,7 +10,9 @@ module org.example.dictionaryappmaster {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
+    requires json.simple;
 
-    opens org.example.dictionaryappmaster to javafx.fxml;
-    exports org.example.dictionaryappmaster;
+    opens Application to javafx.fxml;
+    exports Application;
 }
