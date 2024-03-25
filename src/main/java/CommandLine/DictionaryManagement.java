@@ -2,7 +2,7 @@ package CommandLine;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import java.util.Collections;
 import java.io.*;
 import java.util.*;
 
@@ -16,8 +16,8 @@ public  class DictionaryManagement extends Dictionary {
     static List<String> TargetDictionary = FXCollections.observableArrayList();
     public static final int wordsinlist = 10;
 
-    private static final String IN_PATH = "C:\\Users\\caugi\\Dictionary-App-Master\\src\\main\\resources\\Vocab\\dictionaries.txt";
-    private static final String OUT_PATH = "C:\\Users\\caugi\\Dictionary-App-Master\\src\\main\\resources\\Vocab\\dictionaries.txt";
+    private static final String IN_PATH = "src/main/resources/Vocab/dictionaries1.txt";
+    private static final String OUT_PATH = "src/main/resources/Vocab/dictionaries_out.txt";
 
     public static void sortWordList() {
         Collections.sort(words, new Comparator<Word>() {
@@ -59,7 +59,7 @@ public  class DictionaryManagement extends Dictionary {
         }
     }
 
-
+/**
     public static void insertFromFile() {
         try {
             File inFile = new File(IN_PATH);
@@ -70,10 +70,35 @@ public  class DictionaryManagement extends Dictionary {
                 String[] wordsInLine = line.split(",");
                 Word temp = new Word(wordsInLine[0], wordsInLine[1]);
                 words.add(temp);
+
             }
             sortWordList();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+ */
+
+    public static void insertFromFile() {
+        try {
+            Scanner scan = new Scanner(new File(IN_PATH));
+            String line = scan.nextLine();
+            BufferedReader reader = new BufferedReader(new FileReader(IN_PATH));
+            while ((line = reader.readLine()) != null) {
+                // tach string[] lam 2 de dua vao word_target va word_explain
+                String[] parts = line.split("\t", 2);
+                if (parts.length >= 2) {
+                    String word_target = parts[0].trim();// trim() -> cat nhung dau cach o dau va cuoi
+                    String word_explain = parts[1].trim();
+                    Word word = new Word(word_target, word_explain);
+                    words.add(word);
+                } else {
+                    System.out.println("ignoring line: " + line);
+                }
+            }
+            reader.close();
+        } catch (Exception e) {
+
         }
     }
 
