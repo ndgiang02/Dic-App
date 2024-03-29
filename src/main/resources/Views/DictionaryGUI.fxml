@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Views.DictionaryGUI"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.DictionaryApplication">
+
+    <children>
+        <Label layoutX="24.0" layoutY="27.0" text="English Word:" />
+        <TextArea fx:id="englishWordInput" layoutX="122.0" layoutY="16.0" prefHeight="40.0" prefWidth="200.0" wrapText="true" />
+        <Label layoutX="24.0" layoutY="84.0" text="Meaning:" />
+        <TextArea fx:id="meaningTextArea" layoutX="122.0" layoutY="73.0" prefHeight="150.0" prefWidth="200.0" wrapText="true" />
+
+    </children>
 
 </AnchorPane>

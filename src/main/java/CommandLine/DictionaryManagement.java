@@ -16,8 +16,8 @@ public  class DictionaryManagement extends Dictionary {
     static List<String> TargetDictionary = FXCollections.observableArrayList();
     public static final int wordsinlist = 10;
 
-    private static final String IN_PATH = "src/main/resources/Vocab/dictionaries1.txt";
-    private static final String OUT_PATH = "src/main/resources/Vocab/dictionaries_out.txt";
+    public static final String IN_PATH = "src/main/resources/Vocab/dictionaries1.txt";
+    public static final String OUT_PATH = "src/main/resources/Vocab/dictionaries_out.txt";
 
     public static void sortWordList() {
         Collections.sort(words, new Comparator<Word>() {
@@ -204,6 +204,21 @@ public  class DictionaryManagement extends Dictionary {
             } else {
                 System.out.println("Invalid input, please select from 0-2\n" + "Your action:");
             }
+        }
+    }
+
+
+    public void updateWordToFile(String path, ArrayList<Word> temp) {
+        try {
+            File file = new File(path);
+            FileWriter fileWriter = new FileWriter(file);
+            for (Word word : temp) {
+                fileWriter.write(word.getWord_target() + word.getWord_explain() + "\n");
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -443,3 +443,114 @@ public class ranslateController implements Initializable {
 }
 
 
+
+
+
+
+
+/**
+ public static int binaryCheck(int start, int end, String word) {
+ if (end < start) {
+ return -1;
+ }
+ int mid = start + (end - start) / 2;
+ int compareNext = word.compareTo(words.get(mid).getWord_target());
+ if (mid == 0) {
+ if (compareNext < 0) {
+ return 0;
+ } else if (compareNext > 0) {
+ return binaryCheck(mid + 1, end, word);
+ } else {
+ return -1;
+ }
+ } else {
+ int comparePrevious = word.compareTo(words.get(mid - 1).getWord_target());
+ if (comparePrevious > 0 && compareNext < 0) {
+ return mid;
+ } else if (comparePrevious < 0) {
+ return binaryCheck(start, mid - 1, word);
+ } else if (compareNext > 0) {
+ if (mid == words.size() - 1) {
+ return words.size();
+ }
+ return binaryCheck(mid + 1, end, word);
+ } else {
+ return -1;
+ }
+ }
+ }
+
+
+ public static int binaryLookup(int start, int end, String word) {
+ if (end < start) {
+ return -1;
+ }
+ int mid = start + (end - start) / 2;
+ int compare = isContain(word, words.get(mid).getWord_target());
+ if (compare == -1) {
+ return binaryLookup(start, mid - 1, word);
+ } else if (compare == 1) {
+ return binaryLookup(mid + 1, end, word);
+ } else {
+ return mid;
+ }
+ }
+
+ */
+
+    /**
+     public static void showWordLookup(String word, int index) {
+     if (index < 0) {
+     //System.out.println((new Spelling.("src/main/java/big.txt")).correct(word.toLowerCase()));
+     return;
+     }
+     ArrayList<Word> listWordSearching = new ArrayList<Word>();
+     int j = index;
+     while (j >= 0) {
+     if (isContain(word, words.get(j).getWord_target()) == 0) {
+     j--;
+     } else {
+     break;
+     }
+     }
+     for (int i = j + 1; i <= index; i++) {
+     Word temp = new Word(words.get(i).getWord_target(), words.get(i).getWord_explain());
+     listWordSearching.add(temp);
+     }
+
+     for (int i = index + 1; i < words.size(); i++) {
+     if (isContain(word, words.get(i).getWord_target()) == 0) {
+     Word temp = new Word(words.get(i).getWord_target(), words.get(i).getWord_explain());
+     listWordSearching.add(temp);
+     } else {
+     break;
+     }
+     }
+     for (Word wordSearching : listWordSearching) {
+     System.out.println(wordSearching.getWord_target());
+     }
+     }
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

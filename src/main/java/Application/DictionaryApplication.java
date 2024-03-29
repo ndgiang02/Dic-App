@@ -28,8 +28,7 @@ public class DictionaryApplication extends Application {
 
         Dictionary dictionary = Dictionary.getInstance();
         DictionaryManagement dictionaryManagement = DictionaryManagement.getInstance();
-        dictionaryManagement.insertFromCommandLine();
-
+        dictionaryManagement.insertFromFile();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Views/DictionaryGUI.fxml")));
         stage.setTitle("Dictionary Application");
         stage.initStyle(StageStyle.DECORATED);

@@ -48,6 +48,7 @@ public class TranslateController implements Initializable {
         });
         translateBtn.setDisable(true);
     }
+
     @FXML
     public void onClicktranslateBtn() {
         TranslateAPI translateAPI = new TranslateAPI();
