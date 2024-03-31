@@ -9,6 +9,8 @@ import java.util.*;
 
 public  class DictionaryManagement extends Dictionary {
 
+    public static Dictionary words = new Dictionary();
+
     private static DictionaryManagement instance;
     static int number_of_words = 0;
     private static Trie trie = new Trie();
@@ -59,25 +61,6 @@ public  class DictionaryManagement extends Dictionary {
         }
     }
 
-/**
-    public static void insertFromFile() {
-        try {
-            File inFile = new File(IN_PATH);
-            FileReader fileReader = new FileReader(inFile);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                String[] wordsInLine = line.split(",");
-                Word temp = new Word(wordsInLine[0], wordsInLine[1]);
-                words.add(temp);
-
-            }
-            sortWordList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
- */
 
     public static void insertFromFile() {
         try {
@@ -96,11 +79,13 @@ public  class DictionaryManagement extends Dictionary {
                     System.out.println("ignoring line: " + line);
                 }
             }
+            sortWordList();
             reader.close();
         } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
-    }
 
 
     public static void addWord(String Word_target, String Word_explain) {

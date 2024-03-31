@@ -2,9 +2,7 @@ package CommandLine;
 
 import java.util.ArrayList;
 
-public class Dictionary {
-    public static ArrayList<Word> words = new ArrayList<>();
-
+public class Dictionary extends ArrayList<Word>{
     private static Dictionary instance;
 
     public static Dictionary getInstance() {

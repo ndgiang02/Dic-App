@@ -1,18 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.DictionaryApplication">
-
+<AnchorPane prefHeight="530.0" prefWidth="831.0" styleClass="root" stylesheets="@../Views/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
     <children>
-        <Label layoutX="24.0" layoutY="27.0" text="English Word:" />
-        <TextArea fx:id="englishWordInput" layoutX="122.0" layoutY="16.0" prefHeight="40.0" prefWidth="200.0" wrapText="true" />
-        <Label layoutX="24.0" layoutY="84.0" text="Meaning:" />
-        <TextArea fx:id="meaningTextArea" layoutX="122.0" layoutY="73.0" prefHeight="150.0" prefWidth="200.0" wrapText="true" />
-
+        <Button fx:id="exitButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="exit-button" stylesheets="@../Views/style.css" text="Exit">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/icons8_exit_32px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="searchButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="170.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="     Search">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/icons8_search_24px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <tooltip>
+                <Tooltip fx:id="tooltip1" text="Tra từ điển" />
+            </tooltip>
+        </Button>
+        <Button fx:id="addButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="     Add">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/icons8_add_32px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <tooltip>
+                <Tooltip fx:id="tooltip2" text="Thêm từ vựng mới" />
+            </tooltip>
+        </Button>
+        <Button fx:id="transButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/icons8_google_translate_48px.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <tooltip>
+                <Tooltip fx:id="tooltip3" text="Phiên dịch" />
+            </tooltip>
+        </Button>
+        <Button fx:id="gameButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="100.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/reading.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <tooltip>
+                <Tooltip fx:id="tooltip4" text="Game" />
+            </tooltip>
+        </Button>
+        <Button fx:id="homeButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="50.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icons/home-button (1).png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <tooltip>
+                <Tooltip fx:id="tooltip5" text="Về trang chủ" />
+            </tooltip>
+        </Button>
+        <AnchorPane fx:id="container" layoutX="52.0" layoutY="9.0" prefHeight="510.0" prefWidth="769.0" styleClass="container" />
     </children>
-
 </AnchorPane>
