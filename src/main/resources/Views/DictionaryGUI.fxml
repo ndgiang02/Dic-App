@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="831.0" styleClass="root" stylesheets="@../Views/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
+<AnchorPane prefHeight="530.0" prefWidth="831.0" styleClass="root" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Controller">
     <children>
-        <Button fx:id="exitButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="exit-button" stylesheets="@../Views/style.css" text="Exit">
+        <Button fx:id="exitButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="exit-button" stylesheets="@../style.css" text="Exit">
             <graphic>
                 <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -19,7 +19,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="searchButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="170.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="     Search">
+        <Button fx:id="searchButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="170.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../style.css" text="     Search">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -37,7 +37,7 @@
                 <Tooltip fx:id="tooltip1" text="Tra từ điển" />
             </tooltip>
         </Button>
-        <Button fx:id="addButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="     Add">
+        <Button fx:id="addButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="235.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../style.css" text="     Add">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -55,7 +55,7 @@
                 <Tooltip fx:id="tooltip2" text="Thêm từ vựng mới" />
             </tooltip>
         </Button>
-        <Button fx:id="transButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+        <Button fx:id="transButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="305.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../style.css" text="    Translate">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -73,7 +73,7 @@
                 <Tooltip fx:id="tooltip3" text="Phiên dịch" />
             </tooltip>
         </Button>
-        <Button fx:id="gameButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="100.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+        <Button fx:id="gameButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="100.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../style.css" text="    Translate">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
@@ -91,7 +91,7 @@
                 <Tooltip fx:id="tooltip4" text="Game" />
             </tooltip>
         </Button>
-        <Button fx:id="homeButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="50.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../Views/style.css" text="    Translate">
+        <Button fx:id="homeButton" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="50.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="menu-item" stylesheets="@../style.css" text="    Translate">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

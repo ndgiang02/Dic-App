@@ -96,6 +96,24 @@ public  class DictionaryManagement extends Dictionary {
         trie.insert(fixing_input(Word_target));
     }
 
+    public int searchWord(Dictionary dictionary, String keyWord) {
+        try {
+            sortWordList();
+            int left = 0;
+            int right = dictionary.size() - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                int res = dictionary.get(mid).getWord_target().compareTo(keyWord);
+                if (res == 0) return mid;
+                if (res <= 0) left = mid + 1;
+                else right = mid - 1;
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
+        return -1;
+    }
+
     public static DictionaryManagement getInstance() {
         if (instance == null) {
             instance = new DictionaryManagement();
@@ -240,6 +258,7 @@ public  class DictionaryManagement extends Dictionary {
         }
         return "No Word";
     }
+
 
     public static int getPage() {
         if (TargetDictionary == null) {

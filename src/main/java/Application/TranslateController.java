@@ -53,7 +53,7 @@ public class TranslateController implements Initializable {
     public void onClicktranslateBtn() {
         TranslateAPI translateAPI = new TranslateAPI();
         String target = translateTarget.getText();
-        String explain = translateAPI.translateText(target, sourceLang,targetLang);
+        String explain = TranslateAPI.translateText(target, sourceLang,targetLang);
         translateExplain.setText(explain);
     }
 

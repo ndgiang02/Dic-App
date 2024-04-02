@@ -12,17 +12,20 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+import java.util.concurrent.Delayed;
 
 public class AddWord implements Initializable {
-    private Dictionary dictionary = Dictionary.getInstance();
+
+    private Dictionary dictionary = new Dictionary();
+
     private DictionaryManagement dictionaryManagement = DictionaryManagement.getInstance();
+
+    String path = "src/main/resources/Vocab/dictionaries1.txt";
 
     public TextArea addtarget, addexplain;
     public Button addbtn;
 
     public Label successalert;
-    String path = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,13 +66,14 @@ public class AddWord implements Initializable {
         ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancel = new ButtonType("Huỷ", ButtonBar.ButtonData.CANCEL_CLOSE);
         confirm.getButtonTypes().setAll(ok, ButtonType.CANCEL);
-        Optional<ButtonType> optional = confirm.showAndWait();
+        Optional<ButtonType> option = confirm.showAndWait();
         String target = addtarget.getText().trim();
         String explain = addexplain.getText().trim();
 
-        if (optional.get() == ok) {
-            Word w = new Word(target, explain);
-            if (DictionaryManagement.dictionaryLookup(target) != null) {
+        if (option.get() == ButtonType.OK) {
+            Word word = new Word(target, explain);
+            if (dictionary.contains(word)) {
+                int indexOfWord = dictionaryManagement.searchWord(dictionary, target);
                 Alert select = new Alert(Alert.AlertType.WARNING);
                 select.setTitle("Warning!");
                 select.setHeaderText(null);
@@ -79,34 +83,34 @@ public class AddWord implements Initializable {
                 select.getButtonTypes().setAll(replaceExplain, addExplain, ButtonType.CANCEL);
                 Optional<ButtonType> optional1 = select.showAndWait();
 
-
                 if (optional1.get() == replaceExplain) {
-                  //  dictionaryManagement.dictionaryUpdate(dictionary, target, explain);
+                    dictionary.get(indexOfWord).setWord_explain(explain);
+                    dictionaryManagement.dictionaryExportToFile();
                     successalert();
                 }
-                else if (optional1.get() == addExplain) {
-                  //  dictionaryManagement.dictionaryUpdate(target, explain);
-
+                if (optional1.get() == addExplain) {
+                    String oldMeaning = dictionary.get(indexOfWord).getWord_explain();
+                    dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + explain);
+                    dictionaryManagement.dictionaryExportToFile();
                     successalert();
                 }
-                else if (optional1.get() == ButtonType.CANCEL) {
-                    Alert end = new Alert(Alert.AlertType.INFORMATION);
-                    end.setTitle(null);
-                    end.setHeaderText(null);
-                    end.setContentText("Thay đổi không được lưu!");
-                }
-            }
-            else {
-             //   dictionaryManagement.dictionaryAdd(dictionary, target, explain);
+                else {
+                dictionary.add(word);
+                dictionaryManagement.addWord(target, explain);
                 successalert();
+            }
+
+        } else if (option.get() == ButtonType.CANCEL){
+            Alert end = new Alert(Alert.AlertType.INFORMATION);
+            end.setTitle(null);
+            end.setHeaderText(null);
+            end.setContentText("Thay đổi không được lưu!");
             }
             addbtn.setDisable(true);
             addtarget.setText("");
             addexplain.setText("");
         }
-
     }
-
 
     private void successalert() {
         successalert.setVisible(true);
@@ -124,6 +128,3 @@ public class AddWord implements Initializable {
         }).start();
     }
 }
-
-
-
