@@ -12,6 +12,7 @@ module org.example.dictionaryappmaster {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires json.simple;
+    requires google.cloud.translate;
 
     opens Application to javafx.fxml;
     exports Application;

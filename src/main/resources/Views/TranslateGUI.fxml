@@ -24,7 +24,7 @@
                 <graphic>
                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <Image url="@../icons/icons8_google_translate_64px.png"/>
+                            <Image url="@../icons/translation.png"/>
                         </image>
                     </ImageView>
                 </graphic>
@@ -38,50 +38,20 @@
                 <children>
                     <HBox alignment="CENTER" layoutX="126.0" layoutY="10.0">
                         <children>
-                            <Label fx:id="sourceLangLabel" prefHeight="37.0" text="Tiếng Anh" textFill="#4285f4">
+                            <Label fx:id="english" prefHeight="37.0" text="Tiếng Anh" textFill="#4285f4">
                                 <font>
                                     <Font name="System Bold" size="16.0"/>
                                 </font>
                             </Label>
-                            <Button fx:id="btnListenSource" contentDisplay="CENTER" graphicTextGap="0.0"
-                                    mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0"
-                                    styleClass="cancel-button" stylesheets="@../style.css">
-                                <tooltip>
-                                    <Tooltip text="Nghe"/>
-                                </tooltip>
-                                <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../icons/icons8_speaker_64px.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </Button>
                         </children>
                     </HBox>
                     <HBox alignment="CENTER" layoutX="499.0" layoutY="10.0">
                         <children>
-                            <Label fx:id="targetLangLabel" prefHeight="37.0" text="Tiếng Việt" textFill="#4285f4">
+                            <Label fx:id="vietnam" prefHeight="37.0" text="Tiếng Việt" textFill="#4285f4">
                                 <font>
                                     <Font name="System Bold" size="16.0"/>
                                 </font>
                             </Label>
-                            <Button fx:id="btnListenTarget" contentDisplay="CENTER" graphicTextGap="0.0"
-                                    mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0"
-                                    styleClass="cancel-button" stylesheets="@../style.css">
-                                <tooltip>
-                                    <Tooltip text="Nghe"/>
-                                </tooltip>
-                                <graphic>
-                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="@../icons/icons8_speaker_64px.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </Button>
                         </children>
                     </HBox>
                     <Button fx:id="swapBtn" layoutX="344.0" layoutY="12.0" mnemonicParsing="false"
@@ -90,17 +60,17 @@
                         <graphic>
                             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@../icons/icons8_data_transfer_48px.png"/>
+                                    <Image url="@../icons/exchange.png"/>
                                 </image>
                             </ImageView>
                         </graphic>
                     </Button>
                 </children>
             </Pane>
-            <TextArea fx:id="sourceTextField" layoutY="55.0" prefHeight="318.0" prefWidth="365.0"
+            <TextArea fx:id="translateTarget" layoutY="55.0" prefHeight="318.0" prefWidth="365.0"
                       promptText="Nhập văn bản..." styleClass="src-speech-field" stylesheets="@../style.css"
                       wrapText="true"/>
-            <TextArea fx:id="translateTarget" layoutX="364.0" layoutY="55.0" prefHeight="318.0" prefWidth="365.0"
+            <TextArea fx:id="translateExplain" layoutX="364.0" layoutY="55.0" prefHeight="318.0" prefWidth="365.0"
                       styleClass="to-speech-field" stylesheets="@../style.css" wrapText="true"/>
             <Button fx:id="translateBtn" layoutX="315.0" layoutY="389.0" mnemonicParsing="false"
                     nodeOrientation="RIGHT_TO_LEFT" styleClass="trans-button" stylesheets="@../style.css"

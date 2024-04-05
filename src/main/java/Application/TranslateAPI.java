@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 public class TranslateAPI {
     private static final String API_ENDPOINT = "https://api.mymemory.translated.net/get";
 
-    public static  String translateText(String text, String sourceLang, String targetLang) {
+    public static String translateText(String text, String sourceLang, String targetLang) {
         try {
             String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
             String apiUrl = String.format("%s?q=%s&langpair=%s|%s", API_ENDPOINT, encodedText, sourceLang, targetLang);

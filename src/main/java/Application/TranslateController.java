@@ -1,5 +1,6 @@
 package Application;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,14 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TranslateController implements Initializable {
+
+    private boolean isToVietnameseLang = true;
     private String sourceLang = "en", targetLang = "vi";
     public Label english, vietnam;
 
-    public Button translateBtn, swapBtn;
+    public Button translateBtn, swapBtn, clearBtn;
 
     public TextArea translateTarget, translateExplain;
 
@@ -40,6 +44,15 @@ public class TranslateController implements Initializable {
                 }
             }
         });
+
+        clearBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                translateTarget.clear();
+                translateBtn.setDisable(true);
+            }
+        });
+
         swapBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -53,22 +66,24 @@ public class TranslateController implements Initializable {
     public void onClicktranslateBtn() {
         TranslateAPI translateAPI = new TranslateAPI();
         String target = translateTarget.getText();
-        String explain = TranslateAPI.translateText(target, sourceLang,targetLang);
+        String explain = translateAPI.translateText(target, sourceLang,targetLang);
         translateExplain.setText(explain);
     }
 
     public void onClickswapBtn() {
-        if (sourceLang.equals("en")) {
+        translateExplain.clear();
+        translateTarget.clear();
+        if (isToVietnameseLang) {
+            vietnam.setText("Tiếng Việt");
+            english.setText("Tiếng Anh");
             sourceLang = "vi";
             targetLang = "en";
-            vietnam.setLayoutX(126);
-            english.setLayoutX(459);
-        }
-        else {
+        } else {
+            english.setText("Tiếng Việt");
+            vietnam.setText("Tiếng Anh");
             sourceLang = "en";
             targetLang = "vi";
-            vietnam.setLayoutX(459);
-            english.setLayoutX(126);
         }
+        isToVietnameseLang = !isToVietnameseLang;
     }
 }

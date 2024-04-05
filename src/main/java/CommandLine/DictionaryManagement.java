@@ -120,6 +120,7 @@ public  class DictionaryManagement extends Dictionary {
         }
         return instance;
     }
+
     public void removeFromDictionary(String remove_word) {
         remove_word = fixing_input(remove_word);
         Iterator<Word> iterator = words.iterator();
@@ -136,7 +137,6 @@ public  class DictionaryManagement extends Dictionary {
 
     }
 
-
     public static String fixing_input(String input) {
         if (input.equals("")) {
             return "";
@@ -150,8 +150,7 @@ public  class DictionaryManagement extends Dictionary {
 
 
 
-    public void dictionaryExportToFile()
-    {
+    public void dictionaryExportToFile() {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(OUT_PATH));
             for (Word word : words) {
@@ -162,54 +161,6 @@ public  class DictionaryManagement extends Dictionary {
             e.printStackTrace();
         }
     }
-
-
-    public static void showAllWords() {
-        Scanner input = new Scanner(System.in);
-        System.out.printf("%-7s | %-20s | %-30s%n", "N0", "English", "Vietnamese");
-        boolean exit = false;
-        int page = 0;
-        sortWordList();
-        int get;
-
-        while (!exit) {
-            for (int i = 0; i < wordsinlist; i++) {
-                if (page * wordsinlist + i == TargetDictionary.size()) {
-                    break;
-                }
-                System.out.printf("%-7d | %-20s | %-30s%n", i + 1, TargetDictionary.get(page * wordsinlist + i)
-                        , dictionaryLookup(TargetDictionary.get(page * wordsinlist + i)));
-            }
-            System.out.println("Page " + (page + 1) + " out of " + getPage());
-            System.out.println("[0] Exit "
-                    + "[1] Down page "
-                    + "[2] Up page\n"
-                    + "Your action:");
-            get = input.nextInt();
-            if (get >= 0 && get <= 2) {
-                switch (get) {
-                    case 0:
-                        exit = true;
-                        break;
-                    case 1:
-                        if (page == 0) {
-                            break;
-                        }
-                        page--;
-                        break;
-                    case 2:
-                        if (page >= getPage() - 1) {
-                            break;
-                        }
-                        page++;
-                        break;
-                }
-            } else {
-                System.out.println("Invalid input, please select from 0-2\n" + "Your action:");
-            }
-        }
-    }
-
 
     public void updateWordToFile(String path, ArrayList<Word> temp) {
         try {
@@ -267,5 +218,51 @@ public  class DictionaryManagement extends Dictionary {
         int page = TargetDictionary.size();
         page = (page / wordsinlist) + 1;
         return page;
+    }
+
+    public static void showAllWords() {
+        Scanner input = new Scanner(System.in);
+        System.out.printf("%-7s | %-20s | %-30s%n", "N0", "English", "Vietnamese");
+        boolean exit = false;
+        int page = 0;
+        sortWordList();
+        int get;
+
+        while (!exit) {
+            for (int i = 0; i < wordsinlist; i++) {
+                if (page * wordsinlist + i == TargetDictionary.size()) {
+                    break;
+                }
+                System.out.printf("%-7d | %-20s | %-30s%n", i + 1, TargetDictionary.get(page * wordsinlist + i)
+                        , dictionaryLookup(TargetDictionary.get(page * wordsinlist + i)));
+            }
+            System.out.println("Page " + (page + 1) + " out of " + getPage());
+            System.out.println("[0] Exit "
+                    + "[1] Down page "
+                    + "[2] Up page\n"
+                    + "Your action:");
+            get = input.nextInt();
+            if (get >= 0 && get <= 2) {
+                switch (get) {
+                    case 0:
+                        exit = true;
+                        break;
+                    case 1:
+                        if (page == 0) {
+                            break;
+                        }
+                        page--;
+                        break;
+                    case 2:
+                        if (page >= getPage() - 1) {
+                            break;
+                        }
+                        page++;
+                        break;
+                }
+            } else {
+                System.out.println("Invalid input, please select from 0-2\n" + "Your action:");
+            }
+        }
     }
 }

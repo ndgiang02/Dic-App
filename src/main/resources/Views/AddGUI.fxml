@@ -26,7 +26,7 @@
                 </ImageView>
             </children>
         </Pane>
-        <Pane layoutX="40.0" layoutY="118.0" prefHeight="436.0" prefWidth="384.0" style="-fx-background-color: #af53f8;" styleClass="hi" stylesheets="@../style.css">
+        <Pane layoutX="40.0" layoutY="118.0" prefHeight="400.0" prefWidth="384.0" style="-fx-background-color: #af53f8;" styleClass="hi" stylesheets="@../style.css">
             <children>
                 <Label layoutX="28.0" layoutY="20.0" text="Từ tiếng Anh" textFill="WHITE">
                     <font>
@@ -39,8 +39,8 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="addexplain" layoutX="14.0" layoutY="140.0" prefHeight="227.0" prefWidth="359.0" promptText="Nhập giải nghĩa của từ..." />
-                <Button fx:id="addbtn" layoutX="14.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleaddbutton" prefHeight="26.0" prefWidth="80.0" text="Thêm từ" textFill="#f423a4">
+                <TextArea fx:id="addexplain" layoutX="14.0" layoutY="140.0" prefHeight="220.0" prefWidth="350.0" promptText="Nhập giải nghĩa của từ..." />
+                <Button fx:id="addbtn" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleaddbutton" prefHeight="24.0" prefWidth="80.0" text="Thêm từ" textFill="#f423a4">
                     <font>
                         <Font size="15.0" />
                     </font>
