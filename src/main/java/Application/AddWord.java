@@ -14,9 +14,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.Delayed;
 
-public class AddWord implements Initializable {
-
-    private Dictionary dictionary = new Dictionary();
+public class AddWord extends Dictionary implements Initializable {
 
     private DictionaryManagement dictionaryManagement = DictionaryManagement.getInstance();
 
@@ -85,13 +83,13 @@ public class AddWord implements Initializable {
 
                 if (optional1.get() == replaceExplain) {
                     dictionary.get(indexOfWord).setWord_explain(explain);
-                    dictionaryManagement.dictionaryExportToFile();
+                    dictionaryManagement.dictionaryExportToFile(dictionary);
                     successalert();
                 }
                 if (optional1.get() == addExplain) {
                     String oldMeaning = dictionary.get(indexOfWord).getWord_explain();
                     dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + explain);
-                    dictionaryManagement.dictionaryExportToFile();
+                    dictionaryManagement.dictionaryExportToFile(dictionary);
                     successalert();
                 }
                 else {

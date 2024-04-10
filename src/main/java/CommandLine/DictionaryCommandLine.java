@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class DictionaryCommandLine {
+public class DictionaryCommandLine extends DictionaryManagement{
 
     private static DictionaryManagement d = new DictionaryManagement();
 
@@ -40,7 +40,7 @@ public class DictionaryCommandLine {
                             System.out.print("Input delete word: ");
                             String deleteWord;
                             deleteWord = sc.next();
-                            d.removeFromDictionary(deleteWord);
+                            d.removeFromDictionary(dictionary, deleteWord);
                             break;
                         case 3:
                             System.out.print("Input update word: ");
@@ -75,7 +75,7 @@ public class DictionaryCommandLine {
                             System.out.println("Insert from file successfully");
                             break;
                         case 9:
-                            d.dictionaryExportToFile();
+                            d.dictionaryExportToFile(dictionary);
                             System.out.println("Exprot to file successfully");
                             break;
                     }

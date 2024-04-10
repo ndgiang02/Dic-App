@@ -8,9 +8,6 @@ import java.util.*;
 
 
 public  class DictionaryManagement extends Dictionary {
-
-    public static Dictionary words = new Dictionary();
-
     private static DictionaryManagement instance;
     static int number_of_words = 0;
     private static Trie trie = new Trie();
@@ -22,7 +19,7 @@ public  class DictionaryManagement extends Dictionary {
     public static final String OUT_PATH = "src/main/resources/Vocab/dictionaries_out.txt";
 
     public static void sortWordList() {
-        Collections.sort(words, new Comparator<Word>() {
+        Collections.sort(dictionary, new Comparator<Word>() {
             @Override
             public int compare(Word word1, Word word2) {
                 // So sánh theo thuộc tính target
@@ -52,7 +49,6 @@ public  class DictionaryManagement extends Dictionary {
             if (parts.length >= 2) {
                 String Word_target = fixing_input(parts[0]);
                 String Word_explain = fixing_input(parts[1]);
-                //Word New_word = new Word(Word_target, Word_explain);
                 addWord(Word_target, Word_explain);
             } else {
                 System.out.println("Invalid input. Please enter both target and explain separated by a hyphen.");
@@ -74,7 +70,7 @@ public  class DictionaryManagement extends Dictionary {
                     String word_target = parts[0].trim();// trim() -> cat nhung dau cach o dau va cuoi
                     String word_explain = parts[1].trim();
                     Word word = new Word(word_target, word_explain);
-                    words.add(word);
+                    dictionary.add(word);
                 } else {
                     System.out.println("ignoring line: " + line);
                 }
@@ -82,17 +78,17 @@ public  class DictionaryManagement extends Dictionary {
             sortWordList();
             reader.close();
         } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            e.printStackTrace();
         }
+
+    }
 
 
     public static void addWord(String Word_target, String Word_explain) {
         Word_target = fixing_input(Word_target);
         Word_explain = fixing_input(Word_explain);
         Word New_word = new Word(Word_target, Word_explain);
-        words.add(New_word);
+        dictionary.add(New_word);
         trie.insert(fixing_input(Word_target));
     }
 
@@ -121,9 +117,9 @@ public  class DictionaryManagement extends Dictionary {
         return instance;
     }
 
-    public void removeFromDictionary(String remove_word) {
+    public void removeFromDictionary(Dictionary dictionary, String remove_word) {
         remove_word = fixing_input(remove_word);
-        Iterator<Word> iterator = words.iterator();
+        Iterator<Word> iterator = dictionary.iterator();
         while (iterator.hasNext()) {
             Word word = iterator.next();
             if (word.getWord_target().equals(remove_word)) {
@@ -149,11 +145,10 @@ public  class DictionaryManagement extends Dictionary {
     }
 
 
-
-    public void dictionaryExportToFile() {
+    public void dictionaryExportToFile(Dictionary dictionary) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(OUT_PATH));
-            for (Word word : words) {
+            for (Word word : dictionary) {
                 writer.write(word.getWord_target() + "\t" + word.getWord_explain() + "\n");
             }
             writer.close();
@@ -176,10 +171,11 @@ public  class DictionaryManagement extends Dictionary {
         }
     }
 
-    public void dictionaryUpdate(String update_word)
-    {
+
+
+    public void dictionaryUpdate(String update_word) {
         Scanner input1 = new Scanner(System.in);
-        Iterator<Word> iterator = words.iterator();
+        Iterator<Word> iterator = dictionary.iterator();
         while (iterator.hasNext()) {
             Word word = iterator.next();
             if (word.getWord_target().equals(fixing_input(update_word))) {
@@ -199,15 +195,18 @@ public  class DictionaryManagement extends Dictionary {
         return (ObservableList<String>) TargetDictionary;
     }
 
-    public static String dictionaryLookup(String look_up_word) {
-        Iterator<Word> iterator = words.iterator();
-        while (iterator.hasNext()) {
-            Word word = iterator.next();
-            if (word.getWord_target().equals(fixing_input(look_up_word))) {
-                return word.getWord_explain();
+    public static ObservableList<String> dictionaryLookup(String look_up_word) {
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try {
+            List<String> results = trie.autoComplete(look_up_word);
+            if (results != null) {
+                int length = Math.min(results.size(), 15);
+                for (int i = 0; i < length; i++) list.add(results.get(i));
             }
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
         }
-        return "No Word";
+        return list;
     }
 
 
@@ -263,6 +262,25 @@ public  class DictionaryManagement extends Dictionary {
             } else {
                 System.out.println("Invalid input, please select from 0-2\n" + "Your action:");
             }
+        }
+    }
+
+    public void setTimeout(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
+    }
+
+    public void setTrie(Dictionary dictionary) {
+        try {
+            for (Word word : dictionary) trie.insert(word.getWord_target());
+        } catch (NullPointerException e) {
+            System.out.println("Something went wrong: " + e);
         }
     }
 }

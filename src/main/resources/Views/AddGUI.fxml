@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="781.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.AddWord">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="781.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Application.AddWord">
     <children>
         <Pane layoutX="40.0" layoutY="29.0" prefHeight="64.0" prefWidth="700.0" style="-fx-background-color: #c0d9ff;" styleClass="hi" stylesheets="@../style.css">
             <children>
@@ -26,7 +27,7 @@
                 </ImageView>
             </children>
         </Pane>
-        <Pane layoutX="40.0" layoutY="118.0" prefHeight="400.0" prefWidth="384.0" style="-fx-background-color: #af53f8;" styleClass="hi" stylesheets="@../style.css">
+        <Pane layoutX="40.0" layoutY="118.0" prefHeight="400.0" prefWidth="384.0" style="-fx-background-color: #ef2158;" styleClass="hi" stylesheets="@../style.css">
             <children>
                 <Label layoutX="28.0" layoutY="20.0" text="Từ tiếng Anh" textFill="WHITE">
                     <font>
@@ -40,7 +41,7 @@
                     </font>
                 </Label>
                 <TextArea fx:id="addexplain" layoutX="14.0" layoutY="140.0" prefHeight="220.0" prefWidth="350.0" promptText="Nhập giải nghĩa của từ..." />
-                <Button fx:id="addbtn" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleaddbutton" prefHeight="24.0" prefWidth="80.0" text="Thêm từ" textFill="#f423a4">
+                <Button fx:id="addbtn" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleaddbutton" prefHeight="24.0" prefWidth="80.0" text="Thêm từ" textFill="#1323eb">
                     <font>
                         <Font size="15.0" />
                     </font>

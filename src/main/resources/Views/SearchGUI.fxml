@@ -17,6 +17,11 @@
     <children>
         <Pane layoutX="8.0" prefHeight="91.0" prefWidth="751.0" stylesheets="@../style.css">
             <children>
+                <ImageView fitHeight="120.0" fitWidth="110.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
                 <Label fx:id="notAvailableAlert" alignment="CENTER" layoutX="250.0" layoutY="60.0" opacity="0.9" prefHeight="20.0" prefWidth="230.0" styleClass="warning-alert" stylesheets="@../style.css" text="Rất tiếc từ điển không cung cấp từ này">
                     <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -28,7 +33,7 @@
                 </Label>
                 <Pane fx:id="searchBox" layoutX="226.0" layoutY="20.0" prefHeight="35.0" prefWidth="292.0" styleClass="search-box">
                     <children>
-                        <TextField fx:id="searchTerm" layoutX="29.0" layoutY="3.0" prefHeight="30.0" prefWidth="230.0" promptText="Nhập từ cần tìm kiếm ..." styleClass="search-field" stylesheets="@../style.css" />
+                        <TextField fx:id="searchTerm" layoutX="29.0" layoutY="3.0" prefHeight="30.0" prefWidth="230.0" promptText="Nhập từ cần tìm kiếm ..."  styleClass="search-field" stylesheets="@../style.css" />
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="11.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../icons/icons8_search_24px.png" />
@@ -51,6 +56,11 @@
                 <ImageView fitHeight="72.0" fitWidth="110.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="78.0" fitWidth="110.0" layoutX="617.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/img1.jpg" />
                     </image>
                 </ImageView>
             </children>
@@ -134,7 +144,7 @@
                                         </Label>
                                     </children>
                                 </Pane>
-                                <Button fx:id="saveBtn" layoutX="444.0" layoutY="60.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClickSaveBtn" prefHeight="30.0" prefWidth="30.0" styleClass="save-button" stylesheets="@../Utils/style.css">
+                                <Button fx:id="saveBtn" layoutX="444.0" layoutY="60.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleClickSaveBtn" prefHeight="30.0" prefWidth="30.0" styleClass="save-button" stylesheets="@../style.css">
                                     <graphic>
                                         <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -168,7 +178,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <ListView fx:id="listResults" layoutX="1.5" layoutY="51.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#handleMouseClickAWord" prefHeight="355.0" prefWidth="260.0" styleClass="list-cell" stylesheets="@../Utils/style.css" />
+                        <ListView fx:id="listResults" layoutX="1.5" layoutY="51.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#handleMouseClickAWord" prefHeight="355.0" prefWidth="260.0" styleClass="list-cell" stylesheets="@../style.css" />
                     </children>
                 </AnchorPane>
             </children>

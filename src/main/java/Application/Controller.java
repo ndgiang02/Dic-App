@@ -93,8 +93,6 @@ public class Controller implements Initializable {
             }
         });
 
-
-
         tooltip1.setShowDelay(Duration.seconds(0.5));
         tooltip2.setShowDelay(Duration.seconds(0.5));
         tooltip3.setShowDelay(Duration.seconds(0.5));

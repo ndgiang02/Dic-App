@@ -1,6 +1,8 @@
 package CommandLine;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.collections.FXCollections;
@@ -24,8 +26,7 @@ public class Trie {
         String s;
         if (this.value == null) {
             s = Character.toString(c);
-        }
-        else s = this.value + Character.toString(c);
+        } else s = this.value + Character.toString(c);
         mp.put(c, new Trie(s));
     }
 
@@ -78,5 +79,6 @@ public class Trie {
         }
         trieNode.added = false;
     }
+
 }
 
