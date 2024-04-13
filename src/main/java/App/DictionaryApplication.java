@@ -1,4 +1,4 @@
-package Application;
+package App;
 
 import CommandLine.Dictionary;
 import CommandLine.DictionaryManagement;

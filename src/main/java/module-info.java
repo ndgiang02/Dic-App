@@ -13,7 +13,10 @@ module org.example.dictionaryappmaster {
     requires java.desktop;
     requires json.simple;
     requires google.cloud.translate;
+    requires freetts;
 
-    opens Application to javafx.fxml;
-    exports Application;
+    opens Controllers to javafx.fxml;
+    exports Controllers;
+    exports App;
+    opens App to javafx.fxml;
 }

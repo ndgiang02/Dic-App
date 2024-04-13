@@ -1,4 +1,4 @@
-package Application;
+package Controllers;
 
 import CommandLine.Dictionary;
 import CommandLine.DictionaryManagement;
@@ -14,8 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-//import com.sun.speech.freetts.Voice;
-//import com.sun.speech.freetts.VoiceManager;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 
 
 import java.net.URL;
@@ -107,17 +107,15 @@ public class SearchController extends Dictionary  implements Initializable {
     @FXML
     private void handleClickSoundBtn() {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-        /*VoiceManager voiceManager = VoiceManager.getInstance();
+        VoiceManager voiceManager = VoiceManager.getInstance();
         Voice voice = voiceManager.getVoice("kevin16");
 
         if (voice != null) {
             voice.allocate();
-            voice.speak(text);
+            voice.speak(englishWord.getText());
         } else {
-            System.out.println("Không thể tìm thấy giọng đọc.");
+            System.err.println("Không thể tìm thấy giọng: kevin16");
         }
-
-         */
     }
 
     @FXML

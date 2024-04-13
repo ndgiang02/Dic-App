@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="781.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Application.AddWord">
+            fx:controller="Controllers.AddWord">
     <children>
         <Pane layoutX="40.0" layoutY="29.0" prefHeight="64.0" prefWidth="700.0" style="-fx-background-color: #c0d9ff;" styleClass="hi" stylesheets="@../style.css">
             <children>

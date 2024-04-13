@@ -1,4 +1,4 @@
-package Application;
+package Controllers;
 
 import CommandLine.Dictionary;
 import CommandLine.DictionaryManagement;
@@ -12,7 +12,6 @@ import javafx.scene.input.KeyEvent;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.Delayed;
 
 public class AddWord extends Dictionary implements Initializable {
 
