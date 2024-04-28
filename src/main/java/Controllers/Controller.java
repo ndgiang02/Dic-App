@@ -81,7 +81,7 @@ public class Controller implements Initializable {
         gameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                showComponent("/Views/MultigameGUI.fxml");
+                showComponent("/Views/GameGUI.fxml");
             }
         });
 
@@ -97,7 +97,6 @@ public class Controller implements Initializable {
         tooltip3.setShowDelay(Duration.seconds(0.5));
         tooltip4.setShowDelay(Duration.seconds(0.5));
         tooltip5.setShowDelay(Duration.seconds(0.5));
-        //tooltip6.setShowDelay(Duration.seconds(0.5));
 
         exitButton.setOnMouseClicked(e -> {
             System.exit(0);

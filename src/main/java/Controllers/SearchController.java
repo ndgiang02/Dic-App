@@ -16,12 +16,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
+import javafx.stage.Stage;
 
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+
+import static Constant.Constant.IN_PATH;
 
 public class SearchController extends Dictionary  implements Initializable {
     private DictionaryManagement dictionaryManagement = new DictionaryManagement();
@@ -32,7 +34,6 @@ public class SearchController extends Dictionary  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dictionaryManagement.insertFromFile();
         System.out.println(dictionary.size());
         dictionaryManagement.setTrie(dictionary);
         setListDefault(0);
@@ -70,7 +71,7 @@ public class SearchController extends Dictionary  implements Initializable {
     private void handleOnKeyTyped() {
         list.clear();
         String searchKey = searchTerm.getText().trim();
-        list = dictionaryManagement.dictionaryLookup( searchKey);
+        list = dictionaryManagement.dictionaryLookup(searchKey);
         if (list.isEmpty()) {
             notAvailableAlert.setVisible(true);
             setListDefault(firstIndexOfListFound);
@@ -120,11 +121,10 @@ public class SearchController extends Dictionary  implements Initializable {
 
     @FXML
     private void handleClickSaveBtn() {
-
         Alert alertConfirmation = alerts.alertConfirmation("Update", "Bạn chắc chắn muốn cập nhật nghĩa từ này ?");
         Optional<ButtonType> option = alertConfirmation.showAndWait();
         if (option.get() == ButtonType.OK) {
-            dictionaryManagement.dictionaryUpdate(explanation.getText());
+            dictionaryManagement.dictionaryUpdate(dictionary, indexOfSelectedWord, explanation.getText(), IN_PATH);
             alerts.showAlertInfo("Information", "Cập nhập thành công!");
         } else alerts.showAlertInfo("Information", "Thay đổi không được công nhận!");
         saveBtn.setVisible(false);
@@ -137,10 +137,7 @@ public class SearchController extends Dictionary  implements Initializable {
         alertWarning.getButtonTypes().add(ButtonType.CANCEL);
         Optional<ButtonType> option = alertWarning.showAndWait();
         if (option.get() == ButtonType.OK) {
-            Scanner sc = new Scanner(System.in);
-            String deleteWord;
-            deleteWord = sc.next();
-            dictionaryManagement.removeFromDictionary(dictionary, deleteWord );
+            dictionaryManagement.deleteWord(dictionary, indexOfSelectedWord, IN_PATH);
             refreshAfterDeleting();
             alerts.showAlertInfo("Information", "Xóa thành công");
         } else alerts.showAlertInfo("Information", "Thay đổi không được công nhận");

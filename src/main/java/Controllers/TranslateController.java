@@ -1,6 +1,7 @@
 package Controllers;
 
 
+import Base.TranslateAPI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

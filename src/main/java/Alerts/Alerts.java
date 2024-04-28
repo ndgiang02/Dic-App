@@ -1,10 +1,8 @@
 package Alerts;
 
-
 import javafx.scene.control.Alert;
 
 public class Alerts {
-
     public void showAlertInfo(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

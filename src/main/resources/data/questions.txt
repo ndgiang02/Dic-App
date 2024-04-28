@@ -1,0 +1,69 @@
+What is the capital of France?
+Berlin
+Madrid
+Paris
+Rome
+Correct: C
+
+Who wrote "Romeo and Juliet"?
+Charles Dickens
+William Shakespeare
+Jane Austen
+Mark Twain
+Correct: B
+
+Which planet is known as the Red Planet?
+Venus
+Mars
+Jupiter
+Saturn
+Correct: B
+
+What is the largest mammal on Earth?
+Elephant
+Blue Whale
+Giraffe
+Lion
+Correct: B
+
+In what year did the Titanic sink?
+1905
+1912
+1923
+1931
+Correct: B
+
+What is the currency of Japan?
+Yuan
+Won
+Yen
+Ringgit
+Correct: C
+
+Who painted the Mona Lisa?
+Vincent van Gogh
+Pablo Picasso
+Leonardo da Vinci
+Michelangelo
+Correct: C
+
+Which gas is most abundant in Earth's atmosphere?
+Oxygen
+Carbon dioxide
+Nitrogen
+Hydrogen
+Correct: C
+
+What is the largest ocean on Earth?
+Indian Ocean
+Atlantic Ocean
+Southern Ocean
+Pacific Ocean
+Correct: D
+
+Who is known as the "Father of Computers"?
+Alan Turing
+Charles Babbage
+Ada Lovelace
+Bill Gates
+Correct: B

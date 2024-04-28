@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
@@ -15,11 +16,11 @@ import java.util.ResourceBundle;
 
 public class AddWord extends Dictionary implements Initializable {
 
+    private String path = "src/main/resources/Vocab/dictionaries1.txt";
     private DictionaryManagement dictionaryManagement = DictionaryManagement.getInstance();
 
-    String path = "src/main/resources/Vocab/dictionaries1.txt";
-
     public TextArea addtarget, addexplain;
+
     public Button addbtn;
 
     public Label successalert;
@@ -82,18 +83,18 @@ public class AddWord extends Dictionary implements Initializable {
 
                 if (optional1.get() == replaceExplain) {
                     dictionary.get(indexOfWord).setWord_explain(explain);
-                    dictionaryManagement.dictionaryExportToFile(dictionary);
+                    dictionaryManagement.dictionaryExportToFile(dictionary, path);
                     successalert();
                 }
                 if (optional1.get() == addExplain) {
                     String oldMeaning = dictionary.get(indexOfWord).getWord_explain();
                     dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + explain);
-                    dictionaryManagement.dictionaryExportToFile(dictionary);
+                    dictionaryManagement.dictionaryExportToFile(dictionary, path);
                     successalert();
                 }
                 else {
                 dictionary.add(word);
-                dictionaryManagement.addWord(target, explain);
+                dictionaryManagement.addWord(word, path);
                 successalert();
             }
 
@@ -124,4 +125,5 @@ public class AddWord extends Dictionary implements Initializable {
             }
         }).start();
     }
+
 }

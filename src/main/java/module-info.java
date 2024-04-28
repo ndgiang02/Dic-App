@@ -19,4 +19,6 @@ module org.example.dictionaryappmaster {
     exports Controllers;
     exports App;
     opens App to javafx.fxml;
+    exports Base;
+    opens Base to javafx.fxml;
 }
