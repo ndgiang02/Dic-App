@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.io.*;
 import java.util.*;
 
+import static Constant.Constant.IN_PATH;
+
 
 public  class DictionaryManagement extends Dictionary {
     private static DictionaryManagement instance;
@@ -14,9 +16,6 @@ public  class DictionaryManagement extends Dictionary {
 
     static List<String> TargetDictionary = FXCollections.observableArrayList();
     public static final int wordsinlist = 10;
-
-    public static final String IN_PATH = "src/main/resources/Vocab/dictionaries1.txt";
-    public static final String OUT_PATH = "src/main/resources/Vocab/dictionaries_out.txt";
 
     public static void sortWordList() {
         Collections.sort(dictionary, new Comparator<Word>() {
@@ -28,40 +27,10 @@ public  class DictionaryManagement extends Dictionary {
         });
     }
 
-    public static void insertFromCommandLine() {
-        int n;
-        Scanner input = new Scanner(System.in);
-        do {
-            System.out.println("How many words you want to insert?");
-            n = input.nextInt();
-            number_of_words += n;
-            if (n <= 0) {
-                System.out.println("Invalid input. Please enter valid number.");
-            }
-        } while (n <= 0);
-        input.nextLine();
-        for (int i = 0; i < n; i++) {
-            System.out.print("Enter Word " + (i + 1) + " target-explain: ");
-            String inputLine = input.next();
-
-            String[] parts = inputLine.split("-", 2);
-
-            if (parts.length >= 2) {
-                String Word_target = fixing_input(parts[0]);
-                String Word_explain = fixing_input(parts[1]);
-                addWord(Word_target, Word_explain);
-            } else {
-                System.out.println("Invalid input. Please enter both target and explain separated by a hyphen.");
-                i--;
-            }
-        }
-    }
-
-
+    /* Doc File Tu Dien */
     public static void insertFromFile() {
         try {
-            Scanner scan = new Scanner(new File(IN_PATH));
-            String line = scan.nextLine();
+            String line ;
             BufferedReader reader = new BufferedReader(new FileReader(IN_PATH));
             while ((line = reader.readLine()) != null) {
                 // tach string[] lam 2 de dua vao word_target va word_explain
@@ -83,13 +52,17 @@ public  class DictionaryManagement extends Dictionary {
 
     }
 
-
-    public static void addWord(String Word_target, String Word_explain) {
-        Word_target = fixing_input(Word_target);
-        Word_explain = fixing_input(Word_explain);
-        Word New_word = new Word(Word_target, Word_explain);
-        dictionary.add(New_word);
-        trie.insert(fixing_input(Word_target));
+    /* Thêm tu */
+    public static void addWord(Word word, String path) {
+        try (FileWriter fileWriter = new FileWriter(path, true);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write(word.getWord_target() + "\t" + word.getWord_explain());
+            bufferedWriter.newLine();
+        } catch (IOException e) {
+            System.out.println("IOException.");
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
     }
 
     public int searchWord(Dictionary dictionary, String keyWord) {
@@ -117,20 +90,16 @@ public  class DictionaryManagement extends Dictionary {
         return instance;
     }
 
-    public void removeFromDictionary(Dictionary dictionary, String remove_word) {
-        remove_word = fixing_input(remove_word);
-        Iterator<Word> iterator = dictionary.iterator();
-        while (iterator.hasNext()) {
-            Word word = iterator.next();
-            if (word.getWord_target().equals(remove_word)) {
-                iterator.remove();
-                trie.delete(remove_word);
-                System.out.println("Delete " + remove_word + " succesfully");
-                return;
-            }
-        }
-        System.out.println("There is no word");
 
+    public void deleteWord(Dictionary dictionary, int index, String path) {
+        try {
+            dictionary.remove(index);
+            trie = new Trie();
+            setTrie(dictionary);
+            dictionaryExportToFile(dictionary, path);
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
     }
 
     public static String fixing_input(String input) {
@@ -145,9 +114,9 @@ public  class DictionaryManagement extends Dictionary {
     }
 
 
-    public void dictionaryExportToFile(Dictionary dictionary) {
+    public void dictionaryExportToFile(Dictionary dictionary, String path) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(OUT_PATH));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             for (Word word : dictionary) {
                 writer.write(word.getWord_target() + "\t" + word.getWord_explain() + "\n");
             }
@@ -156,22 +125,6 @@ public  class DictionaryManagement extends Dictionary {
             e.printStackTrace();
         }
     }
-
-    public void updateWordToFile(String path, ArrayList<Word> temp) {
-        try {
-            File file = new File(path);
-            FileWriter fileWriter = new FileWriter(file);
-            for (Word word : temp) {
-                fileWriter.write(word.getWord_target() + word.getWord_explain() + "\n");
-            }
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     public void dictionaryUpdate(String update_word) {
         Scanner input1 = new Scanner(System.in);
@@ -190,10 +143,6 @@ public  class DictionaryManagement extends Dictionary {
         System.out.println("No Word");
     }
 
-    public ObservableList<String> getdictionary(String searchWord) {
-        TargetDictionary = trie.autoComplete(fixing_input(searchWord));
-        return (ObservableList<String>) TargetDictionary;
-    }
 
     public static ObservableList<String> dictionaryLookup(String look_up_word) {
         ObservableList<String> list = FXCollections.observableArrayList();
@@ -207,73 +156,6 @@ public  class DictionaryManagement extends Dictionary {
             System.out.println("Something went wrong: " + e);
         }
         return list;
-    }
-
-
-    public static int getPage() {
-        if (TargetDictionary == null) {
-            return 1;
-        }
-        int page = TargetDictionary.size();
-        page = (page / wordsinlist) + 1;
-        return page;
-    }
-
-    public static void showAllWords() {
-        Scanner input = new Scanner(System.in);
-        System.out.printf("%-7s | %-20s | %-30s%n", "N0", "English", "Vietnamese");
-        boolean exit = false;
-        int page = 0;
-        sortWordList();
-        int get;
-
-        while (!exit) {
-            for (int i = 0; i < wordsinlist; i++) {
-                if (page * wordsinlist + i == TargetDictionary.size()) {
-                    break;
-                }
-                System.out.printf("%-7d | %-20s | %-30s%n", i + 1, TargetDictionary.get(page * wordsinlist + i)
-                        , dictionaryLookup(TargetDictionary.get(page * wordsinlist + i)));
-            }
-            System.out.println("Page " + (page + 1) + " out of " + getPage());
-            System.out.println("[0] Exit "
-                    + "[1] Down page "
-                    + "[2] Up page\n"
-                    + "Your action:");
-            get = input.nextInt();
-            if (get >= 0 && get <= 2) {
-                switch (get) {
-                    case 0:
-                        exit = true;
-                        break;
-                    case 1:
-                        if (page == 0) {
-                            break;
-                        }
-                        page--;
-                        break;
-                    case 2:
-                        if (page >= getPage() - 1) {
-                            break;
-                        }
-                        page++;
-                        break;
-                }
-            } else {
-                System.out.println("Invalid input, please select from 0-2\n" + "Your action:");
-            }
-        }
-    }
-
-    public void setTimeout(Runnable runnable, int delay) {
-        new Thread(() -> {
-            try {
-                Thread.sleep(delay);
-                runnable.run();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-        }).start();
     }
 
     public void setTrie(Dictionary dictionary) {
