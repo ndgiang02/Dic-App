@@ -16,24 +16,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
-import javafx.stage.Stage;
-
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static Constant.Constant.IN_PATH;
-
 public class SearchController extends Dictionary  implements Initializable {
+    private Dictionary dictionary = new Dictionary();
     private DictionaryManagement dictionaryManagement = new DictionaryManagement();
     ObservableList<String> list = FXCollections.observableArrayList();
+    private final String IN_PATH = "src/main/resources/data/dictionaries1.txt";
     private final Alerts alerts = new Alerts();
     private int indexOfSelectedWord;
     private int firstIndexOfListFound = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dictionaryManagement.insertFromFile(dictionary, IN_PATH);
         System.out.println(dictionary.size());
         dictionaryManagement.setTrie(dictionary);
         setListDefault(0);
@@ -183,4 +182,3 @@ public class SearchController extends Dictionary  implements Initializable {
     @FXML
     private Pane headerOfExplanation;
 }
-

@@ -19,9 +19,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Constant.Constant.QUESTION_PATH;
+
 
 public class GameController {
+
+    private final String QUESTION_PATH ="src/main/resources/data/questions.txt";
 
     @FXML
     public Label question;

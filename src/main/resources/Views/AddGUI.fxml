@@ -34,14 +34,14 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="addtarget" layoutX="14.0" layoutY="48.0" prefHeight="50.0" prefWidth="359.0" promptText="Nhập từ tiếng Anh mới..." />
+                <TextArea fx:id="wordTargetInput" layoutX="14.0" layoutY="48.0" prefHeight="50.0" prefWidth="359.0" promptText="Nhập từ tiếng Anh mới..." />
                 <Label layoutX="28.0" layoutY="114.0" prefHeight="17.0" prefWidth="101.0" text="Giải nghĩa" textFill="#fafafa">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="addexplain" layoutX="14.0" layoutY="140.0" prefHeight="220.0" prefWidth="350.0" promptText="Nhập giải nghĩa của từ..." />
-                <Button fx:id="addbtn" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleaddbutton" prefHeight="24.0" prefWidth="80.0" text="Thêm từ" textFill="#1323eb">
+                <TextArea fx:id="explanationInput" layoutX="14.0" layoutY="140.0" prefHeight="220.0" prefWidth="350.0" promptText="Nhập giải nghĩa của từ..." />
+                <Button fx:id="addBtn" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleClickAddBtn" prefHeight="24.0" prefWidth="80.0" text="Thêm từ" textFill="#1323eb">
                     <font>
                         <Font size="15.0" />
                     </font>

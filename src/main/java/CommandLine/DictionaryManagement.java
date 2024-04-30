@@ -6,16 +6,12 @@ import java.util.Collections;
 import java.io.*;
 import java.util.*;
 
-import static Constant.Constant.IN_PATH;
-
-
 public  class DictionaryManagement extends Dictionary {
-    private static DictionaryManagement instance;
-    static int number_of_words = 0;
-    private static Trie trie = new Trie();
 
-    static List<String> TargetDictionary = FXCollections.observableArrayList();
-    public static final int wordsinlist = 10;
+    private static Dictionary dictionary = new Dictionary();
+    private static DictionaryManagement instance;
+
+    private static Trie trie = new Trie();
 
     public static void sortWordList() {
         Collections.sort(dictionary, new Comparator<Word>() {
@@ -28,11 +24,12 @@ public  class DictionaryManagement extends Dictionary {
     }
 
     /* Doc File Tu Dien */
-    public static void insertFromFile() {
+    public static void insertFromFile(Dictionary dictionary, String path) {
         try {
-            String line ;
-            BufferedReader reader = new BufferedReader(new FileReader(IN_PATH));
-            while ((line = reader.readLine()) != null) {
+            FileReader fileReader = new FileReader(path);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 // tach string[] lam 2 de dua vao word_target va word_explain
                 String[] parts = line.split("\t", 2);
                 if (parts.length >= 2) {
@@ -40,24 +37,23 @@ public  class DictionaryManagement extends Dictionary {
                     String word_explain = parts[1].trim();
                     Word word = new Word(word_target, word_explain);
                     dictionary.add(word);
-                } else {
-                    System.out.println("ignoring line: " + line);
                 }
             }
-            sortWordList();
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            bufferedReader.close();
         }
-
-    }
+            catch(IOException e){
+                System.out.println("An error occur with file: " + e);
+            } catch(Exception e){
+                System.out.println("Something went wrong: " + e);
+            }
+        }
 
     /* Thêm tu */
     public static void addWord(Word word, String path) {
         try (FileWriter fileWriter = new FileWriter(path, true);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            bufferedWriter.write(word.getWord_target() + "\t" + word.getWord_explain());
-            bufferedWriter.newLine();
+             BufferedWriter writer = new BufferedWriter(fileWriter)) {
+             writer.write(word.getWord_target() + "\t" + word.getWord_explain());
+             writer.newLine();
         } catch (IOException e) {
             System.out.println("IOException.");
         } catch (NullPointerException e) {
@@ -83,14 +79,6 @@ public  class DictionaryManagement extends Dictionary {
         return -1;
     }
 
-    public static DictionaryManagement getInstance() {
-        if (instance == null) {
-            instance = new DictionaryManagement();
-        }
-        return instance;
-    }
-
-
     public void deleteWord(Dictionary dictionary, int index, String path) {
         try {
             dictionary.remove(index);
@@ -102,23 +90,13 @@ public  class DictionaryManagement extends Dictionary {
         }
     }
 
-    public static String fixing_input(String input) {
-        if (input.equals("")) {
-            return "";
-        }
-        input = input.toLowerCase();
-        input = input.trim();
-        char firstChar = input.charAt(0);
-        char upperFirstChar = Character.toUpperCase(firstChar);
-        return upperFirstChar + input.substring(1);
-    }
-
 
     public void dictionaryExportToFile(Dictionary dictionary, String path) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             for (Word word : dictionary) {
-                writer.write(word.getWord_target() + "\t" + word.getWord_explain() + "\n");
+                writer.write(word.getWord_target() + "\t" + word.getWord_explain());
+                writer.newLine();
             }
             writer.close();
         } catch (IOException e) {

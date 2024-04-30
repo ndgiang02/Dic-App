@@ -1,5 +1,6 @@
 package Controllers;
 
+import Alerts.Alerts;
 import CommandLine.Dictionary;
 import CommandLine.DictionaryManagement;
 import CommandLine.Word;
@@ -8,109 +9,83 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AddWord extends Dictionary implements Initializable {
-
-    private String path = "src/main/resources/Vocab/dictionaries1.txt";
-    private DictionaryManagement dictionaryManagement = DictionaryManagement.getInstance();
-
-    public TextArea addtarget, addexplain;
-
-    public Button addbtn;
-
-    public Label successalert;
+public class AddWord implements Initializable {
+    private Dictionary dictionary = new Dictionary();
+    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+    private final String path = "src/main/resources/data/dictionaries1.txt";
+    private Alerts alerts = new Alerts();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (addtarget.getText().isEmpty() || addexplain.getText().isEmpty()) {
-            addbtn.setDisable(true);
-        }
-        addtarget.setOnKeyTyped(new EventHandler<KeyEvent>() {
+        dictionaryManagement.insertFromFile(dictionary, path);
+        if (explanationInput.getText().isEmpty() || wordTargetInput.getText().isEmpty()) addBtn.setDisable(true);
+
+        wordTargetInput.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (addtarget.getText().isEmpty() || addexplain.getText().isEmpty()) {
-                    addbtn.setDisable(true);
-                } else {
-                    addbtn.setDisable(false);
-                }
+                if (explanationInput.getText().isEmpty() || wordTargetInput.getText().isEmpty()) addBtn.setDisable(true);
+                else addBtn.setDisable(false);
             }
         });
 
-        addexplain.setOnKeyTyped(new EventHandler<KeyEvent>() {
+        explanationInput.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (addtarget.getText().isEmpty() || addexplain.getText().isEmpty()) {
-                    addbtn.setDisable(true);
-                } else {
-                    addbtn.setDisable(false);
-                }
+                if (explanationInput.getText().isEmpty() || wordTargetInput.getText().isEmpty()) addBtn.setDisable(true);
+                else addBtn.setDisable(false);
             }
         });
+
         successalert.setVisible(false);
     }
 
     @FXML
-    public void handleaddbutton() throws InterruptedException {
-
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Add Word");
-        confirm.setHeaderText(null);
-        confirm.setContentText("Bạn có chắc chắn muốn thêm từ này?");
-        ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancel = new ButtonType("Huỷ", ButtonBar.ButtonData.CANCEL_CLOSE);
-        confirm.getButtonTypes().setAll(ok, ButtonType.CANCEL);
-        Optional<ButtonType> option = confirm.showAndWait();
-        String target = addtarget.getText().trim();
-        String explain = addexplain.getText().trim();
+    private void handleClickAddBtn() {
+        Alert alertConfirmation = alerts.alertConfirmation("Add word", "Bạn chắc chắn muốn thêm từ này?");
+        Optional<ButtonType> option = alertConfirmation.showAndWait();
+        String englishWord = wordTargetInput.getText().trim();
+        String meaning = explanationInput.getText().trim();
 
         if (option.get() == ButtonType.OK) {
-            Word word = new Word(target, explain);
+            Word word = new Word(englishWord, meaning);
             if (dictionary.contains(word)) {
-                int indexOfWord = dictionaryManagement.searchWord(dictionary, target);
-                Alert select = new Alert(Alert.AlertType.WARNING);
-                select.setTitle("Warning!");
-                select.setHeaderText(null);
-                select.setContentText("Từ đã có sẵn!\nBạn có thể chọn bổ sung hoặc thay thế nghĩa của từ đã nhập");
-                ButtonType replaceExplain = new ButtonType("Replace");
-                ButtonType addExplain = new ButtonType("Add");
-                select.getButtonTypes().setAll(replaceExplain, addExplain, ButtonType.CANCEL);
-                Optional<ButtonType> optional1 = select.showAndWait();
+                int indexOfWord = dictionaryManagement.searchWord(dictionary, englishWord);
+                Alert selectionAlert = alerts.alertConfirmation("This word already exists", "Từ này đã tồn tại.\nThay thế hoặc bổ sung nghĩa vừa nhập cho nghĩa cũ.");
+                selectionAlert.getButtonTypes().clear();
+                ButtonType replaceBtn = new ButtonType("Thay thế");
+                ButtonType insertBtn = new ButtonType("Bổ sung");
+                selectionAlert.getButtonTypes().addAll(replaceBtn, insertBtn, ButtonType.CANCEL);
+                Optional<ButtonType> selection = selectionAlert.showAndWait();
 
-                if (optional1.get() == replaceExplain) {
-                    dictionary.get(indexOfWord).setWord_explain(explain);
+                if (selection.get() == replaceBtn) {
+                    dictionary.get(indexOfWord).setWord_explain(meaning);
                     dictionaryManagement.dictionaryExportToFile(dictionary, path);
-                    successalert();
+                    successAlert();
                 }
-                if (optional1.get() == addExplain) {
+                if (selection.get() == insertBtn) {
                     String oldMeaning = dictionary.get(indexOfWord).getWord_explain();
-                    dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + explain);
+                    dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + meaning);
                     dictionaryManagement.dictionaryExportToFile(dictionary, path);
-                    successalert();
+                    successAlert();
                 }
-                else {
+                if (selection.get() == ButtonType.CANCEL) alerts.showAlertInfo("Information", "Thay đổi không được công nhận.");
+            } else {
                 dictionary.add(word);
                 dictionaryManagement.addWord(word, path);
-                successalert();
+                successAlert();
             }
-
-        } else if (option.get() == ButtonType.CANCEL){
-            Alert end = new Alert(Alert.AlertType.INFORMATION);
-            end.setTitle(null);
-            end.setHeaderText(null);
-            end.setContentText("Thay đổi không được lưu!");
-            }
-            addbtn.setDisable(true);
-            addtarget.setText("");
-            addexplain.setText("");
-        }
+            addBtn.setDisable(true);
+            wordTargetInput.setText("");
+            explanationInput.setText("");
+        } else if (option.get() == ButtonType.CANCEL) alerts.showAlertInfo("Information", "Thay đổi không được công nhận.");
     }
 
-    private void successalert() {
+    private void successAlert() {
         successalert.setVisible(true);
         setDelay(() -> successalert.setVisible(false), 2000);
     }
@@ -126,4 +101,15 @@ public class AddWord extends Dictionary implements Initializable {
         }).start();
     }
 
+    @FXML
+    private Button addBtn;
+
+    @FXML
+    private TextArea wordTargetInput;
+
+    @FXML
+    private TextArea explanationInput;
+
+    @FXML
+    private Label successalert;
 }
