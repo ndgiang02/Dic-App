@@ -37,13 +37,13 @@ public class Controller implements Initializable {
     @FXML
     private ImageView home;
 
-    private void setNode(Node node) {
+    public void setNode(Node node) {
         container.getChildren().clear();
         container.getChildren().add(node);
     }
 
     @FXML
-    private void showComponent(String path) {
+    public void showComponent(String path) {
         try {
             AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(path));
             setNode(anchorPane);
@@ -81,7 +81,7 @@ public class Controller implements Initializable {
         gameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                showComponent("/Views/GameGUI.fxml");
+                showComponent("/Views/HomeGameGUI.fxml");
             }
         });
 

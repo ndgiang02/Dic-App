@@ -2,6 +2,8 @@ package Controllers;
 
 
 import Base.TranslateAPI;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.Translation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,26 +14,32 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TranslateController implements Initializable {
 
     private boolean isToVietnameseLang = true;
+
     private String sourceLang = "en", targetLang = "vi";
+
     public Label english, vietnam;
 
     public Button translateBtn, swapBtn, clearBtn;
 
     public TextArea translateTarget, translateExplain;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         translateBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClicktranslateBtn();
+                try {
+                    onClicktranslateBtn();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -57,31 +65,33 @@ public class TranslateController implements Initializable {
         swapBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                onClickswapBtn();
+                handleOnClickSwap();
             }
         });
         translateBtn.setDisable(true);
+
     }
 
     @FXML
-    public void onClicktranslateBtn() {
+    public void onClicktranslateBtn() throws IOException {
         TranslateAPI translateAPI = new TranslateAPI();
         String target = translateTarget.getText();
-        String explain = translateAPI.translateText(target, sourceLang,targetLang);
+        String explain = translateAPI.translate(sourceLang, targetLang, target);
         translateExplain.setText(explain);
     }
 
-    public void onClickswapBtn() {
-        translateExplain.clear();
+    @FXML
+    private void handleOnClickSwap() {
         translateTarget.clear();
+        translateExplain.clear();
         if (isToVietnameseLang) {
             vietnam.setText("Tiếng Việt");
             english.setText("Tiếng Anh");
             sourceLang = "vi";
             targetLang = "en";
         } else {
-            english.setText("Tiếng Việt");
             vietnam.setText("Tiếng Anh");
+            english.setText("Tiếng Việt");
             sourceLang = "en";
             targetLang = "vi";
         }

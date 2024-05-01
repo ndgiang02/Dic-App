@@ -21,4 +21,6 @@ module org.example.dictionaryappmaster {
     opens App to javafx.fxml;
     exports Base;
     opens Base to javafx.fxml;
+    exports Game;
+    opens Game to javafx.fxml;
 }

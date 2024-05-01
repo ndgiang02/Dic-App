@@ -9,7 +9,6 @@ import java.util.*;
 public  class DictionaryManagement extends Dictionary {
 
     private static Dictionary dictionary = new Dictionary();
-    private static DictionaryManagement instance;
 
     private static Trie trie = new Trie();
 

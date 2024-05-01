@@ -1,8 +1,9 @@
-package Controllers;
+package Game;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,32 +12,40 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-
-public class ResultController {
-
-    @FXML
-    private AnchorPane container;
+public class ResultController implements Initializable {
 
     @FXML
-    private ImageView home;
+    private ProgressIndicator correct_progress;
 
     @FXML
-    public Label remark, marks, markstext, correcttext, wrongtext;
+    private Label correcttext;
 
     @FXML
-    public ProgressIndicator correct_progress, wrong_progress;
+    private Label marks;
+
+    @FXML
+    private Label markstext;
+
+    @FXML
+    private Label remark;
+
+    @FXML
+    private ProgressIndicator wrong_progress;
+
+    @FXML
+    private Label wrongtext;
 
     private int correct;
     private int wrong;
     private int sum;
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         correct = GameController.correct;
         wrong = GameController.wrong;
         sum = correct + wrong;
@@ -45,30 +54,24 @@ public class ResultController {
         if (sum == 0) {
             handleZeroSum();
         }
-
-
         correcttext.setText("Correct Answers : " + correct);
         wrongtext.setText("Incorrect Answers : " + wrong);
-
         marks.setText(correct + "/" + sum);
         float correctf = (float) correct / sum;
         correct_progress.setProgress(correctf);
-
         float wrongf = (float) wrong / sum;
         wrong_progress.setProgress(wrongf);
-
         markstext.setText(correct + " Marks Scored");
 
         if (correctf <= 0.4) {
             remark.setText("Đừng nản lòng! Hãy ôn tập thêm và thử lại lần nữa! ");
-        }  else if (correctf > 0.4 && correctf <= 0.8) {
+        } else if (correctf > 0.4 && correctf <= 0.8) {
             remark.setText("Làm tốt lắm! Bạn đã nắm bắt được khá nhiều kiến thức, cố gắng phát huy nhé! ");
         } else if (correctf >= 0.8 && correctf < 1) {
             remark.setText("Tuyệt vời! Bạn đã hiểu rất rõ về các chủ đề này. Tiếp tục duy trì phong độ nhé! ");
         } else if (correctf == 1) {
             remark.setText("Tuyệt vời! Chúc mừng bạn đã đạt điểm tuyệt đối! ");
         }
-        //reset wrong và correct
         GameController.resetValues();
     }
 
@@ -77,10 +80,4 @@ public class ResultController {
         System.exit(0);
     }
 
-    @FXML
-    public void handleBackwardButton(ActionEvent event) {
-                container.getChildren().add(home);
-
-    }
 }
-

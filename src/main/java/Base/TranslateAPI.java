@@ -1,54 +1,41 @@
 package Base;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class TranslateAPI {
-    private static final String API_ENDPOINT = "https://api.mymemory.translated.net/get";
 
-    public static String translateText(String text, String sourceLang, String targetLang) {
-        try {
-            String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
-            String apiUrl = String.format("%s?q=%s&langpair=%s|%s", API_ENDPOINT, encodedText, sourceLang, targetLang);
-
-            URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-
-            reader.close();
-            connection.disconnect();
-
-            JSONParser parser = new JSONParser();
-            JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
-
-            if (jsonResponse.containsKey("responseData")) {
-                JSONObject responseData = (JSONObject) jsonResponse.get("responseData");
-
-                if (responseData.containsKey("translatedText")) {
-                    String translatedText = (String) responseData.get("translatedText");
-                    return translatedText;
-                }
-            }
-            return "Not found";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error";
-        }
+    public static void main(String[] args) throws IOException {
+        // Văn bản cần dịch
+        String text = "Văn bản cần dịch";
+        System.out.println("Translated text: " + translate("", "en", text));
     }
-}
 
+    public static String translate(String langFrom, String langTo, String text) throws IOException {
+        // URL của google app script
+        String urlStr = "https://script.google.com/macros/s/AKfycbz4xJ9v8gx4PKk7-AA_bqJkTFhZdfjDnunrWXfMKpnW8t-CiQEynTDXsImOnxgRWXiX/exec" +
+                "?q=" + URLEncoder.encode(text, "UTF-8") + "&target=" + langTo + "&source=" + langFrom;
+        URL url = new URL(urlStr);
+
+        //Lưu trữ phản hồi của server
+        StringBuilder response = new StringBuilder();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        //Giả mạo trình duyệt
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        //Input
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
+    }
+
+}

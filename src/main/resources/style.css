@@ -321,3 +321,16 @@
 .submit-button:hover {
     -fx-background-color: #66CDAA;
 }
+.background {
+    -fx-background-color: #ea7a67;
+}
+/*play-button*/
+.play-button {
+    -fx-background-color: #40E0D0;
+    -fx-background-radius: 5px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 5px;
+}
+.play-button:hover {
+    -fx-background-color: #66CDAA;
+}

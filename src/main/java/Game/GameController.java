@@ -1,6 +1,7 @@
-package Controllers;
+package Game;
 
 import Base.Question;
+import Controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-
-public class GameController {
+public class GameController extends Controller implements Initializable {
 
     private final String QUESTION_PATH ="src/main/resources/data/questions.txt";
 
@@ -38,10 +38,14 @@ public class GameController {
     private List<Question> questions;
 
     @FXML
-    private void initialize() {
-        questions = readQuestionsFromFile(QUESTION_PATH);
-        Collections.shuffle(questions); // Trộn danh sách câu hỏi
-        loadQuestions();
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            questions = readQuestionsFromFile(QUESTION_PATH);
+            Collections.shuffle(questions); // Trộn danh sách câu hỏi
+            loadQuestions();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private List<Question> readQuestionsFromFile(String filePath) {
@@ -67,6 +71,7 @@ public class GameController {
         }
         return quizQuestions;
     }
+
 
     private void loadQuestions() {
         if (counter < 10) {
@@ -135,7 +140,7 @@ public class GameController {
         thisStage.close();
         // Add code here to display the result scene
         try {
-            FXMLLoader quiz = new FXMLLoader(getClass().getResource("ResultGUI.fxml"));
+            FXMLLoader quiz = new FXMLLoader(getClass().getClassLoader().getResource("Views/Result.fxml"));
             Scene quizscene = new Scene(quiz.load());
             Stage quizstage = new Stage();
             quizstage.setScene(quizscene);

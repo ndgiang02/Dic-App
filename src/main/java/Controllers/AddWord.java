@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AddWord implements Initializable {
+public class AddWord extends Dictionary implements Initializable {
     private Dictionary dictionary = new Dictionary();
     private DictionaryManagement dictionaryManagement = new DictionaryManagement();
     private final String path = "src/main/resources/data/dictionaries1.txt";
