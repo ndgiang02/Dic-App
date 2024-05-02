@@ -10,7 +10,7 @@
     <children>
         <Button fx:id="playButton" layoutX="265.0" layoutY="350.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="274.0" styleClass="play-button" stylesheets="@../style.css" text="PLAY" textFill="WHITE">
             <font>
-                <Font name="Open Sans Semibold" size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Button>
         <ImageView fitHeight="271.0" fitWidth="300.0" layoutX="267.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">

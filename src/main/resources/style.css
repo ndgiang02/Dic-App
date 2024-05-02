@@ -222,7 +222,7 @@
 }
 .warning-alert{
     -fx-font-size: 12px;
-    -fx-text-fill: #c41b1b;
+    -fx-text-fill: #f39e3d;
     -fx-background-color:  #F8DADA;
     -fx-background-radius: 2;
     -fx-border-radius: 2;
@@ -322,7 +322,7 @@
     -fx-background-color: #66CDAA;
 }
 .background {
-    -fx-background-color: #ea7a67;
+    -fx-background-color: #c4df8f;
 }
 /*play-button*/
 .play-button {

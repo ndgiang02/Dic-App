@@ -9,7 +9,7 @@
     <children>
         <Label fx:id="question" alignment="CENTER" layoutX="65.0" layoutY="62.0" prefHeight="120.0" prefWidth="540.0" styleClass="quiz-label" stylesheets="@../style.css" text="1. How many consonants are there in the English Alphabets?" wrapText="true" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="62.0">
             <font>
-                <Font name="Roboto" size="19.0" />
+                <Font name="System Bold" size="19.0" />
             </font>
         </Label>
         <Button fx:id="opt5" layoutX="337.0" layoutY="462.0" mnemonicParsing="false" onAction="#opt5clicked" prefHeight="34.0" prefWidth="77.0" styleClass="submit-button" stylesheets="@../style.css" text="Nộp bài" />
@@ -17,7 +17,7 @@
             <children>
                 <Button fx:id="opt1" mnemonicParsing="false" onAction="#opt1clicked" prefHeight="60.0" prefWidth="230.0" styleClass="answer-button" stylesheets="@../style.css" text="Button">
                     <font>
-                        <Font name="Open Sans Semibold" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Button>
                 <Button fx:id="opt3" mnemonicParsing="false" onAction="#opt3clicked" prefHeight="60.0" prefWidth="230.0" styleClass="answer-button" stylesheets="@../style.css" text="Button">
@@ -34,12 +34,12 @@
             <children>
                 <Button fx:id="opt2" mnemonicParsing="false" onAction="#opt2clicked" prefHeight="60.0" prefWidth="230.0" styleClass="answer-button" stylesheets="@../style.css" text="Button">
                     <font>
-                        <Font name="Roboto" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                 </Button>
                 <Button fx:id="opt4" mnemonicParsing="false" onAction="#opt4clicked" prefHeight="60.0" prefWidth="230.0" styleClass="answer-button" stylesheets="@../style.css" text="Button">
                     <font>
-                        <Font name="Roboto" size="17.0" />
+                        <Font name="System Bold" size="17.0" />
                     </font>
                     <VBox.margin>
                         <Insets top="40.0" />

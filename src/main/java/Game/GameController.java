@@ -1,7 +1,6 @@
 package Game;
 
 import Base.Question;
-import Controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +14,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
-public class GameController extends Controller implements Initializable {
+public class GameController implements Initializable {
 
     private final String QUESTION_PATH ="src/main/resources/data/questions.txt";
 
@@ -93,7 +89,6 @@ public class GameController extends Controller implements Initializable {
         }
     }
 
-
     @FXML
     public void opt1clicked(ActionEvent event) {
         checkAnswer("A");
@@ -133,17 +128,20 @@ public class GameController extends Controller implements Initializable {
     }
 
     private void displayResultScene(ActionEvent event) {
-        //In số câu hỏi đúng sai
+            //In số câu hỏi đúng sai
         System.out.println("Correct Answers: " + correct);
         System.out.println("Wrong Answers: " + wrong);
         Stage thisStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         thisStage.close();
         // Add code here to display the result scene
         try {
-            FXMLLoader quiz = new FXMLLoader(getClass().getClassLoader().getResource("Views/Result.fxml"));
+            URL url = getClass().getResource("/Views/GUI.fxml");
+            System.out.println("URL: " + url);
+            FXMLLoader quiz = new FXMLLoader(getClass().getResource("/Views/GUI.fxml"));
             Scene quizscene = new Scene(quiz.load());
             Stage quizstage = new Stage();
             quizstage.setScene(quizscene);
+            quizstage.setTitle("Result");
             quizstage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,7 +1,5 @@
 # Dictionary Application
 
-
-
 ## Contributors
 
 - [Trần Quốc Hưng (20020167) - K65-K]
@@ -23,7 +21,7 @@ Bài tập lớn  Lập trình hướng đối tượng - INT2204 - 1
 - IntelliJ IDEA 2024.1
 - Scene Builder 21.0
 - Java SE Development Kit 21
-- JavaFX vesion 17.0.1
+- JavaFX vesion 21
 - CSS
 - Maven Framework
 - FreeTTS 1.2.2 Library
