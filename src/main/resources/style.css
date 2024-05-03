@@ -24,7 +24,7 @@
     -fx-font-family: "Poppins";
 }
 .menu-item:hover{
-    -fx-background-color: #bbd5aa;
+    -fx-background-color: #efb393;
 }
 .menu-item:focused{
     -fx-background-color: #c6a1d6;

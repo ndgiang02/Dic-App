@@ -135,8 +135,6 @@ public class GameController implements Initializable {
         thisStage.close();
         // Add code here to display the result scene
         try {
-            URL url = getClass().getResource("/Views/GUI.fxml");
-            System.out.println("URL: " + url);
             FXMLLoader quiz = new FXMLLoader(getClass().getResource("/Views/GUI.fxml"));
             Scene quizscene = new Scene(quiz.load());
             Stage quizstage = new Stage();
