@@ -2,7 +2,7 @@
     src: url("fonts/Roboto-Regular.ttf");
 }
 .root{
-    -fx-background-color: linear-gradient(to top right, #c4df8f, rgba(206, 241, 167, 0.78));
+    -fx-background-color: linear-gradient(to top right, #6bdfea, rgba(97, 166, 243, 0.78));
     -fx-background-radius: 5;
     -fx-border-radius: 5;
 }
@@ -55,7 +55,7 @@
     -fx-effect: dropshadow(three-pass-box, #418816, 3, 0, 0, 1) ;
 }
 .cancel-button:pressed{
-    -fx-effect: dropshadow(three-pass-box, #62ff00, 4, 0, 0, 1) ;
+    -fx-effect: dropshadow(three-pass-box, #b9f19f, 4, 0, 0, 1) ;
 }
 .definition-wrapper{
     -fx-border-width: 1.5;

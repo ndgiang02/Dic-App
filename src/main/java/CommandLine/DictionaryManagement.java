@@ -1,6 +1,7 @@
 
 package CommandLine;
 
+import Base.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.Collections;
@@ -13,9 +14,11 @@ public  class DictionaryManagement extends Dictionary {
 
     private static Trie trie = new Trie();
 
-    static List<String> TargetDictionary = FXCollections.observableArrayList();
-
     public static final int wordsinlist = 10;
+
+    public static String QUESTION_PATH = "src/main/resources/data/questions.txt";
+
+
 
     public static void sortWordList() {
         Collections.sort(dictionary, new Comparator<Word>() {
@@ -26,7 +29,6 @@ public  class DictionaryManagement extends Dictionary {
             }
         });
     }
-
 
     /* Doc File Tu Dien */
     public static void insertFromFile(Dictionary dictionary, String path) {
@@ -94,7 +96,6 @@ public  class DictionaryManagement extends Dictionary {
             System.out.println("Null Exception.");
         }
     }
-
 
     public static void dictionaryExportToFile(Dictionary dictionary, String path) {
         try {
@@ -172,10 +173,10 @@ public  class DictionaryManagement extends Dictionary {
     }
 
     public static int getPage() {
-        if (TargetDictionary == null) {
+        if (dictionary == null) {
             return 1;
         }
-        int page = TargetDictionary.size();
+        int page = dictionary.size();
         page = (page / wordsinlist) + 1;
         return page;
     }
@@ -190,11 +191,11 @@ public  class DictionaryManagement extends Dictionary {
 
         while (!exit) {
             for (int i = 0; i < wordsinlist; i++) {
-                if (page * wordsinlist + i == TargetDictionary.size()) {
+                if (page * wordsinlist + i == dictionary.size()) {
                     break;
                 }
-                System.out.printf("%-7d | %-20s | %-30s%n", i + 1, TargetDictionary.get(page * wordsinlist + i)
-                        , dictionaryLookup(TargetDictionary.get(page * wordsinlist + i)));
+                System.out.printf("%-7d | %-50s | %-50s%n", i + 1, dictionary.get(page * wordsinlist + i)
+                        , dictionaryLookup(String.valueOf(dictionary.get(page * wordsinlist + i))));
             }
             System.out.println("Page " + (page + 1) + " out of " + getPage());
             System.out.println("[0] Exit "
@@ -225,4 +226,49 @@ public  class DictionaryManagement extends Dictionary {
             }
         }
     }
+
+    public static void removeWord(Dictionary dictionary, int index) {
+        try {
+            dictionary.remove(index);
+            trie = new Trie();
+            setTrie(dictionary);
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
+    }
+
+    public static void updateWord(Dictionary dictionary, int index, String meaning) {
+        try {
+            dictionary.get(index).setWord_explain(meaning);
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
+    }
+
+    public static List<Question> readQuestionsFromFile(String filePath) {
+        List<Question> quizQuestions = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {  // Bỏ qua các dòng trắng
+                    String question = line;
+                    List<String> options = new ArrayList<>();
+                    for (int i = 0; i < 4; i++) {
+                        options.add(br.readLine());
+                    }
+                    String correctLine = br.readLine();
+                    String correctAnswer = correctLine.substring(correctLine.lastIndexOf(":") + 1).trim();
+
+                    Question quizQuestion = new Question(question, options, correctAnswer);
+                    quizQuestions.add(quizQuestion);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return quizQuestions;
+    }
+
+
+
 }

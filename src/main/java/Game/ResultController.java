@@ -1,5 +1,6 @@
 package Game;
 
+import CommandLine.DictionaryManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ResultController implements Initializable {
+public class ResultController extends DictionaryManagement implements Initializable {
 
     @FXML
     public Label remark, marks, markstext, correcttext, wrongtext;
@@ -24,8 +25,8 @@ public class ResultController implements Initializable {
     @FXML
     public ProgressIndicator correct_progress, wrong_progress;
 
-    private int correct;
-    private int wrong;
+    private int correct, wrong;
+
     private int sum;
 
     private void handleZeroSum() {

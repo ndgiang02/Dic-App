@@ -1,10 +1,8 @@
 package App;
 
 import CommandLine.DictionaryManagement;
+import CommandLine.GameCommandLine;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -48,7 +46,7 @@ public class DictionaryCommandLine extends DictionaryManagement {
                             String deleteWord = sc.next();
                             int deleteIndex = searchWord(dictionary, deleteWord);
                             if (deleteIndex != -1) {
-                                deleteWord(dictionary, deleteIndex, "src/main/resources/data/test.txt");
+                                removeWord(dictionary, deleteIndex);
                                 System.out.println("Word deleted successfully.");
                             } else {
                                 System.out.println("Word not found in the dictionary.");
@@ -61,7 +59,7 @@ public class DictionaryCommandLine extends DictionaryManagement {
                             if (updateIndex != -1) {
                                 System.out.print("Input new meaning: ");
                                 String newMeaning = sc.next();
-                                dictionaryUpdate(dictionary, updateIndex, newMeaning, "src/main/resources/data/test.txt");
+                                updateWord(dictionary, updateIndex, newMeaning);
                                 System.out.println("Word updated successfully.");
                             } else {
                                 System.out.println("Word not found in the dictionary.");
@@ -79,9 +77,10 @@ public class DictionaryCommandLine extends DictionaryManagement {
                             System.out.print("Search word: ");
                             String Search = sc.next();
                             searchWord(dictionary, Search);
+                          //  System.out.println("Word searched successfully." + );
                             break;
                         case 7:
-                            Quiz();
+                            GameCommandLine.MutilChoice();
                             break;
                         case 8:
                             insertFromFile(dictionary, "src/main/resources/data/test.txt");
@@ -97,38 +96,11 @@ public class DictionaryCommandLine extends DictionaryManagement {
                 }
             }
             sc.close();
-        } catch (InputMismatchException | IOException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Wrong input");
             dictionaryAdvanced();
         }
     }
 
-
-    public static void Quiz() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/data/questions.txt"));
-        Scanner scanner = new Scanner(System.in);
-        String line;
-        int questionNumber = 0;
-
-        while ((line = reader.readLine()) != null) {
-            if (line.startsWith("Câu hỏi")) {
-                System.out.println(line);
-                questionNumber++;
-            } else if (line.startsWith("A)") || line.startsWith("B)") || line.startsWith("C)") || line.startsWith("D)")) {
-                System.out.println(line);
-            } else if (line.matches("[A-D]")) {
-                String answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase(line)) {
-                    System.out.println("Đáp án đúng!");
-                } else {
-                    System.out.println("Đáp án sai. Đáp án đúng là: " + line);
-                }
-            } else if (line.isEmpty()) {
-                System.out.println(); // In ra một dòng trống giữa các câu hỏi
-            }
-        }
-        reader.close();
-        scanner.close();
-    }
 }
 

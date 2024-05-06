@@ -1,6 +1,7 @@
 package Game;
 
 import Base.Question;
+import CommandLine.DictionaryManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ import java.net.URL;
 import java.util.*;
 
 
-public class GameController implements Initializable {
+public class GameController extends DictionaryManagement  implements Initializable {
 
     private final String QUESTION_PATH ="src/main/resources/data/questions.txt";
 
@@ -27,11 +28,13 @@ public class GameController implements Initializable {
     @FXML
     public Button opt1, opt2, opt3, opt4, opt5;
 
-    private static int counter = 0;
+    private List<Question> questions;
+
     public static int correct = 0;
+
     public static int wrong = 0;
 
-    private List<Question> questions;
+    private int counter = 0;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,31 +46,6 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    private List<Question> readQuestionsFromFile(String filePath) {
-        List<Question> quizQuestions = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (!line.trim().isEmpty()) {  // Bỏ qua các dòng trắng
-                    String question = line;
-                    List<String> options = new ArrayList<>();
-                    for (int i = 0; i < 4; i++) {
-                        options.add(br.readLine());
-                    }
-                    String correctLine = br.readLine();
-                    String correctAnswer = correctLine.substring(correctLine.lastIndexOf(":") + 1).trim();
-
-                    Question quizQuestion = new Question(question, options, correctAnswer);
-                    quizQuestions.add(quizQuestion);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return quizQuestions;
-    }
-
 
     private void loadQuestions() {
         if (counter < 10) {

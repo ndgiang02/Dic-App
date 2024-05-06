@@ -26,3 +26,7 @@ Bài tập lớn  Lập trình hướng đối tượng - INT2204 - 1
 - Maven Framework
 - FreeTTS 1.2.2 Library
 
+## Demo
+
+- Màn hình chính
+  ![](src/main/resources/images/preview.png)

@@ -47,6 +47,7 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Từ vựng: " + word_target + "\nGiải thích: " + word_explain;
+        return   word_target + "\t"  + word_explain;
     }
+
 }

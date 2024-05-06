@@ -69,16 +69,5 @@ public class Trie {
         return completeArr;
     }
 
-    public void delete(String deleteWord) {
-        Trie trieNode = this;
-        for (char c : deleteWord.toCharArray()) {
-            if (!trieNode.mp.containsKey(c)) {
-                return;
-            }
-            trieNode = trieNode.mp.get(c);
-        }
-        trieNode.added = false;
-    }
-
 }
 

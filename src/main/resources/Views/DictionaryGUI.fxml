@@ -12,7 +12,7 @@
     <children>
         <Button fx:id="exitButton" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="4.0" layoutY="469.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" styleClass="exit-button" stylesheets="@../style.css" text="Exit">
             <graphic>
-                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../icons/logout_blue.png" />
                     </image>
@@ -78,9 +78,9 @@
                 <Font name="System Bold" size="12.0" />
             </font>
             <graphic>
-                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/quiz.png" />
+                        <Image url="@../icons/logoQuiz.png" />
                     </image>
                 </ImageView>
             </graphic>
@@ -98,7 +98,7 @@
             <graphic>
                 <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/home.png" />
+                        <Image url="@../icons/home-button (1).png" />
                     </image>
                 </ImageView>
             </graphic>
