@@ -29,4 +29,4 @@ Bài tập lớn  Lập trình hướng đối tượng - INT2204 - 1
 ## Demo
 
 - Màn hình chính
-  ![](src/main/resources/images/preview.png)
+  ![Preview](https://github.com/ndgiang02/Dictionary-App-Master/assets/158442283/8d5fd9b9-f6c8-4190-b4bb-403913463df6)
