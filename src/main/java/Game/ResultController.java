@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ResultController extends DictionaryManagement implements Initializable {
+public class ResultController implements Initializable {
 
     @FXML
     public Label remark, marks, markstext, correcttext, wrongtext;

@@ -18,8 +18,6 @@ public  class DictionaryManagement extends Dictionary {
 
     public static String QUESTION_PATH = "src/main/resources/data/questions.txt";
 
-
-
     public static void sortWordList() {
         Collections.sort(dictionary, new Comparator<Word>() {
             @Override
@@ -30,7 +28,6 @@ public  class DictionaryManagement extends Dictionary {
         });
     }
 
-    /* Doc File Tu Dien */
     public static void insertFromFile(Dictionary dictionary, String path) {
         try {
             FileReader fileReader = new FileReader(path);
@@ -55,7 +52,6 @@ public  class DictionaryManagement extends Dictionary {
         }
     }
 
-    /* Thêm tu */
     public static void addWord(Word word, String path) {
         try (FileWriter fileWriter = new FileWriter(path, true);
              BufferedWriter writer = new BufferedWriter(fileWriter)) {
@@ -268,7 +264,5 @@ public  class DictionaryManagement extends Dictionary {
         }
         return quizQuestions;
     }
-
-
 
 }
