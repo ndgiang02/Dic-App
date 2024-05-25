@@ -14,15 +14,13 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AddWord extends Dictionary implements Initializable {
-    private Dictionary dictionary = new Dictionary();
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+public class AddWord extends DictionaryManagement implements Initializable {
     private final String path = "src/main/resources/data/dictionaries1.txt";
     private Alerts alerts = new Alerts();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dictionaryManagement.insertFromFile(dictionary, path);
+        insertFromFile(dictionary, path);
         if (explanationInput.getText().isEmpty() || wordTargetInput.getText().isEmpty()) addBtn.setDisable(true);
 
         wordTargetInput.setOnKeyTyped(new EventHandler<KeyEvent>() {
@@ -54,7 +52,7 @@ public class AddWord extends Dictionary implements Initializable {
         if (option.get() == ButtonType.OK) {
             Word word = new Word(englishWord, meaning);
             if (dictionary.contains(word)) {
-                int indexOfWord = dictionaryManagement.searchWord(dictionary, englishWord);
+                int indexOfWord = searchWord(dictionary, englishWord);
                 Alert selectionAlert = alerts.alertConfirmation("This word already exists", "Từ này đã tồn tại.\nThay thế hoặc bổ sung nghĩa vừa nhập cho nghĩa cũ.");
                 selectionAlert.getButtonTypes().clear();
                 ButtonType replaceBtn = new ButtonType("Thay thế");
@@ -64,19 +62,19 @@ public class AddWord extends Dictionary implements Initializable {
 
                 if (selection.get() == replaceBtn) {
                     dictionary.get(indexOfWord).setWord_explain(meaning);
-                    dictionaryManagement.dictionaryExportToFile(dictionary, path);
+                    dictionaryExportToFile(dictionary, path);
                     successAlert();
                 }
                 if (selection.get() == insertBtn) {
                     String oldMeaning = dictionary.get(indexOfWord).getWord_explain();
                     dictionary.get(indexOfWord).setWord_explain(oldMeaning + "\n= " + meaning);
-                    dictionaryManagement.dictionaryExportToFile(dictionary, path);
+                    dictionaryExportToFile(dictionary, path);
                     successAlert();
                 }
                 if (selection.get() == ButtonType.CANCEL) alerts.showAlertInfo("Information", "Thay đổi không được công nhận.");
             } else {
                 dictionary.add(word);
-                dictionaryManagement.addWord(word, path);
+                addWord(word, path);
                 successAlert();
             }
             addBtn.setDisable(true);

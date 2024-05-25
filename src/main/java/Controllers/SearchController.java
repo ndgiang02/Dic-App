@@ -21,9 +21,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class SearchController extends Dictionary  implements Initializable {
-    private Dictionary dictionary = new Dictionary();
-    private DictionaryManagement dictionaryManagement = new DictionaryManagement();
+public class SearchController extends DictionaryManagement  implements Initializable {
     ObservableList<String> list = FXCollections.observableArrayList();
     private final String IN_PATH = "src/main/resources/data/dictionaries1.txt";
     private final Alerts alerts = new Alerts();
@@ -32,9 +30,9 @@ public class SearchController extends Dictionary  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dictionaryManagement.insertFromFile(dictionary, IN_PATH);
+       insertFromFile(dictionary, IN_PATH);
         System.out.println(dictionary.size());
-        dictionaryManagement.setTrie(dictionary);
+        setTrie(dictionary);
         setListDefault(0);
 
         searchTerm.setOnKeyTyped(new EventHandler<KeyEvent>() {
@@ -70,7 +68,7 @@ public class SearchController extends Dictionary  implements Initializable {
     private void handleOnKeyTyped() {
         list.clear();
         String searchKey = searchTerm.getText().trim();
-        list = dictionaryManagement.dictionaryLookup(searchKey);
+        list = dictionaryLookup(searchKey);
         if (list.isEmpty()) {
             notAvailableAlert.setVisible(true);
             setListDefault(firstIndexOfListFound);
@@ -78,7 +76,7 @@ public class SearchController extends Dictionary  implements Initializable {
             notAvailableAlert.setVisible(false);
             headerList.setText("Kết quả");
             listResults.setItems(list);
-            firstIndexOfListFound = dictionaryManagement.searchWord(dictionary, list.get(0));
+            firstIndexOfListFound = searchWord(dictionary, list.get(0));
         }
     }
 
@@ -86,7 +84,7 @@ public class SearchController extends Dictionary  implements Initializable {
     private void handleMouseClickAWord(MouseEvent arg0) {
         String selectedWord = listResults.getSelectionModel().getSelectedItem();
         if (selectedWord != null) {
-            indexOfSelectedWord = dictionaryManagement.searchWord(dictionary, selectedWord);
+            indexOfSelectedWord = searchWord(dictionary, selectedWord);
             if (indexOfSelectedWord == -1) return;
             englishWord.setText(dictionary.get(indexOfSelectedWord).getWord_target());
             explanation.setText(dictionary.get(indexOfSelectedWord).getWord_explain());
@@ -123,7 +121,7 @@ public class SearchController extends Dictionary  implements Initializable {
         Alert alertConfirmation = alerts.alertConfirmation("Update", "Bạn chắc chắn muốn cập nhật nghĩa từ này ?");
         Optional<ButtonType> option = alertConfirmation.showAndWait();
         if (option.get() == ButtonType.OK) {
-            dictionaryManagement.dictionaryUpdate(dictionary, indexOfSelectedWord, explanation.getText(), IN_PATH);
+            dictionaryUpdate(dictionary, indexOfSelectedWord, explanation.getText(), IN_PATH);
             alerts.showAlertInfo("Information", "Cập nhập thành công!");
         } else alerts.showAlertInfo("Information", "Thay đổi không được công nhận!");
         saveBtn.setVisible(false);
@@ -136,7 +134,7 @@ public class SearchController extends Dictionary  implements Initializable {
         alertWarning.getButtonTypes().add(ButtonType.CANCEL);
         Optional<ButtonType> option = alertWarning.showAndWait();
         if (option.get() == ButtonType.OK) {
-            dictionaryManagement.deleteWord(dictionary, indexOfSelectedWord, IN_PATH);
+            deleteWord(dictionary, indexOfSelectedWord, IN_PATH);
             refreshAfterDeleting();
             alerts.showAlertInfo("Information", "Xóa thành công");
         } else alerts.showAlertInfo("Information", "Thay đổi không được công nhận");

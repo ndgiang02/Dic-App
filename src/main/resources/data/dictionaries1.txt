@@ -1,6 +1,6 @@
-abandoned	bị bỏ rơi, ruồng bỏ
+abandoned	bị bỏ rơi cbsahdàhdskgh
 ability	có khả năng
-about	trong khoảng
+about	csábfjsfbjsfbjksf
 above	ở trên
 abroad	ở nước ngoài
 absence	vắng mặt
@@ -3902,3 +3902,5 @@ youth	thiếu niên
 zero	số không
 zone	khu vực
 giang	ha
+duy	hảo
+ngoctuan	tuan ngoc

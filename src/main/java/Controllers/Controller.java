@@ -32,8 +32,6 @@ public class Controller implements Initializable {
     protected Stage stage;
     protected Scene scene;
 
-    protected DictionaryManagement d = new DictionaryManagement();
-
     @FXML
     private ImageView home;
 
