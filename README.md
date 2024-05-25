@@ -24,5 +24,4 @@
 
 ## Demo
 
-- Màn hình chính
   ![Preview](https://github.com/ndgiang02/Dictionary-App-Master/assets/158442283/8d5fd9b9-f6c8-4190-b4bb-403913463df6)
