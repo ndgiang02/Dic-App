@@ -2,12 +2,8 @@
 
 ## Contributors
 
-- [Trần Quốc Hưng (20020167) - K65-K]
 - [Nguyễn Duy Giang (20020651) - K65-K]
-
-## Introduction
-
-Bài tập lớn  Lập trình hướng đối tượng - INT2204 - 1
+- [Trần Quốc Hưng (20020167) - K65-K]
 
 ## Features
 
