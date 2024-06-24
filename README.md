@@ -1,15 +1,14 @@
 # Dictionary Application
 
-## Contributors
+## Group
 
-- [Trần Quốc Hưng (20020167) - K65-K]
 - [Nguyễn Duy Giang (20020651) - K65-K]
+- [Trần Quốc Hưng (20020167) - K65-K]
 
-## Introduction
+## Introduce
 
 Bài tập lớn  Lập trình hướng đối tượng - INT2204 - 1
 
-## Features
 
 - Thêm, sửa, xóa từ
 - Tra từ
